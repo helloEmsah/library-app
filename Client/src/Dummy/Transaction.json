@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "userOrAuthor": "Spongebob Squarepants",
+    "ISBN": "01234567890",
+    "ebook": "F is FUN",
+    "status": 0,
+    "action": "true"
+  },
+  {
+    "id": 2,
+    "userOrAuthor": "Patrick Star",
+    "ISBN": "4513548735",
+    "ebook": "The Jobless",
+    "status": 1,
+    "action": "false"
+  },
+
+  {
+    "id": 3,
+    "userOrAuthor": "Goku",
+    "ISBN": "15346842311",
+    "ebook": "How to become Super Saiyan",
+    "status": 2,
+    "action": "true"
+  },
+  {
+    "id": 4,
+    "userOrAuthor": "Saitama",
+    "ISBN": "4513845614",
+    "ebook": "A Hundred Push Up!",
+    "status": 2,
+    "action": "true"
+  }
+]

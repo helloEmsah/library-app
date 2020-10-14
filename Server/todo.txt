@@ -1,0 +1,4 @@
+Add user relation on Book //is this done?
+Fix every joi validation if possible //is this done?
+Integrate with Frontend
+
