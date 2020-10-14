@@ -8,6 +8,33 @@ const joi = require("@hapi/joi");
 
 const secretKey = process.env.SECRET_KEY;
 
+// exports.AuthCheck = async (req, res) => {
+//   try {
+//     const data = await Users.findOne({
+//       where: {
+//         id: req.user.id,
+//       },
+//       attributes: {
+//         exclude: ["createdAt", "updatedAt", "password"],
+//       },
+//     });
+
+//     res.send({
+//       message: "user_valid",
+//       data,
+//     });
+
+//   } catch (err) {
+//     console.log(err);
+
+//     res.status(500).send({
+//       error: {
+//         message: "Server ERROR",
+//       },
+//     });
+//   }
+// };
+
 exports.Register = async (req, res) => {
   try {
     const { fullName, email, password, gender, phone, address } = req.body;

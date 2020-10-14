@@ -2,11 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import LoginContextProvider from "./Context/LoginContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LoginContextProvider>
+      <App />
+    </LoginContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

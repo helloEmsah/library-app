@@ -26,6 +26,7 @@ const {
 // REGISTER & LOGIN ROUTE
 router.post("/register", Register);
 router.post("/login", Login);
+// router.get("/auth", )
 
 // USER ROUTE
 router.get("/user", getAllUser);
