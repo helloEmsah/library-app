@@ -11,8 +11,9 @@ import ReadBook from "./Pages/ReadBook";
 import AddBook from "./Pages/AddBook";
 import TopNav from "./Components/Home/TopNav";
 import AdminPages from "./Pages/AdminPages";
-import { API, setAuthToken } from "./Config/api";
 import PrivateRoute from "./Pages/PrivateRoute/Private";
+import { API, setAuthToken } from "./Config/api";
+import { LoginContext } from "./Context/LoginContext";
 import "./index.css";
 
 if (localStorage.token) {
@@ -20,12 +21,24 @@ if (localStorage.token) {
 }
 
 function App() {
+  const [state, dispatch] = useContext(LoginContext);
+
   useEffect(() => {
     const loadUser = async () => {
       try {
         const res = await API.get("/auth");
-      } catch (error) {}
+
+        dispatch({
+          type: "USER_LOADED",
+          payload: res.data.data.user,
+        });
+      } catch (error) {
+        dispatch({
+          type: "AUTH_ERROR",
+        });
+      }
     };
+    loadUser();
   }, []);
 
   return (

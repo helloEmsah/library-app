@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "fullName": "Prinz Eugen",
-  "email"   : "prinzEugen@root.com",
+  "email"   : "test12@root.com",
   "password" : "thisisroot",
   "gender": "Female",
   "phone": "08123456789",
@@ -19,7 +19,7 @@ Content-Type: application/json
 //Authorization: 
 
 {
-  "email"   : "prinzEugen@root.com",
+  "email"   : "test11@root.com ",
   "password" : "thisisroot"
 }
 

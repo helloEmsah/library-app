@@ -5,7 +5,7 @@ const { authentication } = require("../middleware/auth");
 
 const { getAllUser, getUser, deleteUser } = require("../controllers/user");
 
-const { Register, Login } = require("../controllers/auth");
+const { Register, Login, checkAuth } = require("../controllers/auth");
 
 const {
   getAllBook,
@@ -26,7 +26,7 @@ const {
 // REGISTER & LOGIN ROUTE
 router.post("/register", Register);
 router.post("/login", Login);
-// router.get("/auth", )
+router.get("/auth", authentication, checkAuth);
 
 // USER ROUTE
 router.get("/user", getAllUser);

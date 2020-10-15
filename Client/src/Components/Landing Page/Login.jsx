@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { LoginContext } from "../../Context/LoginContext";
-import style from "../../Styles/styles";
 import { useHistory } from "react-router-dom";
+import { API, setAuthToken } from "../../Config/api";
+import style from "../../Styles/styles";
 
 function Login() {
   const history = useHistory();
@@ -20,22 +21,42 @@ function Login() {
     setFormLogin({ ...formLogin, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email === "user@root.com" && password === "user") {
-      console.log("LOGIN AS USER");
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const body = JSON.stringify({ email, password });
+    try {
+      const res = await API.post("/login", body, config);
+
       dispatch({
-        type: "LOGIN",
+        type: "LOGIN_SUCCESS",
+        payload: res.data.data,
       });
-      history.push("/home");
-    } else if (email === "admin@root.com" && password === "admin") {
-      console.log("LOGIN AS ADMIN");
+
+      setAuthToken(res.data.data.token);
+
+      try {
+        const res = await API.get("/auth");
+
+        dispatch({
+          type: "USER_LOADED",
+          payload: res.data.data.user,
+        });
+      } catch (error) {
+        dispatch({
+          type: "AUTH_ERROR",
+        });
+      }
+    } catch (error) {
       dispatch({
-        type: "LOGIN",
+        type: "LOGIN_FAIL",
       });
-      history.push("/admin");
-    } else {
-      console.log("INCORRECT EMAIL OR PASSWORD");
     }
   };
 
@@ -66,7 +87,7 @@ function Login() {
                   backgroundColor: "#D2D2D2",
                   opacity: 0.25,
                   color: "#333333",
-                  borderColor: "black"
+                  borderColor: "black",
                 }}
                 type="email"
                 name="email"
@@ -86,7 +107,7 @@ function Login() {
                   backgroundColor: "#D2D2D2",
                   opacity: 0.25,
                   color: "#333333",
-                  borderColor: "black"
+                  borderColor: "black",
                 }}
               />
             </Form.Group>
