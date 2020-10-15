@@ -19,7 +19,7 @@ Content-Type: application/json
 //Authorization: 
 
 {
-  "email"   : "test11@root.com ",
+  "email"   : "admin@root.com",
   "password" : "thisisroot"
 }
 

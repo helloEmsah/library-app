@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { LoginContext } from "../../Context/LoginContext";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { API, setAuthToken } from "../../Config/api";
 import style from "../../Styles/styles";
 
-function Login() {
+function Login(props) {
   const history = useHistory();
   const [state, dispatch] = useContext(LoginContext);
 
@@ -39,6 +39,8 @@ function Login() {
         payload: res.data.data,
       });
 
+      console.log(res);
+
       setAuthToken(res.data.data.token);
 
       try {
@@ -52,6 +54,12 @@ function Login() {
         dispatch({
           type: "AUTH_ERROR",
         });
+      }
+
+      if (email == "admin@root.com") {
+        history.push("/admin");
+      } else {
+        history.push("/home");
       }
     } catch (error) {
       dispatch({
@@ -120,7 +128,9 @@ function Login() {
           <br />
           <p id="modalRegularText">
             Don't have an account yet? Click
-            <span style={{ fontWeight: 800 }}> here</span>
+            <Link onClick={props.onClickSignUp}>
+              <span style={{ fontWeight: 800 }}> here</span>
+            </Link>
           </p>
         </Modal.Body>
       </Modal>

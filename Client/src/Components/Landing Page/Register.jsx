@@ -1,9 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { LoginContext } from "../../Context/LoginContext";
+import { API, setAuthToken } from "../../Config/api";
 import { Button, Form, Modal } from "react-bootstrap";
 import style from "../../Styles/styles";
 
-function Register() {
+function Register(props) {
+  const history = useHistory();
+  const [state, dispatch] = useContext(LoginContext);
   const [show, setShow] = useState(false);
+
+  const [formRegister, setFormRegister] = useState({
+    email: "",
+    password: "",
+    fullName: "",
+    gender: "",
+    phone: "",
+    address: "",
+  });
+
+  const { email, password, fullName, phone, address } = formRegister;
+
+  const handleChange = (e) => {
+    setFormRegister({ ...formRegister, [e.target.name]: e.target.value });
+  };
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -28,7 +48,7 @@ function Register() {
                   backgroundColor: "#D2D2D2",
                   opacity: 0.25,
                   color: "#333333",
-                  borderColor: "black"
+                  borderColor: "black",
                 }}
                 type="email"
                 placeholder="Email"
@@ -40,7 +60,7 @@ function Register() {
                   backgroundColor: "#D2D2D2",
                   opacity: 0.25,
                   color: "#333333",
-                  borderColor: "black"
+                  borderColor: "black",
                 }}
                 type="password"
                 placeholder="Password"
@@ -52,7 +72,7 @@ function Register() {
                   backgroundColor: "#D2D2D2",
                   opacity: 0.25,
                   color: "#333333",
-                  borderColor: "black"
+                  borderColor: "black",
                 }}
                 type="text"
                 placeholder="Full Name"
@@ -64,7 +84,7 @@ function Register() {
                   backgroundColor: "#D2D2D2",
                   opacity: 0.25,
                   color: "#333333",
-                  borderColor: "black"
+                  borderColor: "black",
                 }}
                 as="select"
                 defaultValue="Gender"
@@ -79,7 +99,7 @@ function Register() {
                   backgroundColor: "#D2D2D2",
                   opacity: 0.25,
                   color: "#333333",
-                  borderColor: "black"
+                  borderColor: "black",
                 }}
                 type="text"
                 placeholder="Phone"
@@ -91,7 +111,7 @@ function Register() {
                   backgroundColor: "#D2D2D2",
                   opacity: 0.25,
                   color: "#333333",
-                  borderColor: "black"
+                  borderColor: "black",
                 }}
                 type="text"
                 placeholder="Address"
