@@ -131,10 +131,10 @@ exports.addBook = async (req, res) => {
     // const schema = joi.object({
     //   title: joi.string().min(3).required(),
     //   author: joi.string().min(3).required(),
-    //   publication: joi.string().min(3).alphanum().required(),
+    //   publication: joi.string().min(3).required(),
     //   categoryId: joi.required(),
-    //   page: joi.string().required(),
-    //   isbn: joi.number.min(3).max(11).required(),
+    //   page: joi.string(),
+    //   isbn: joi.number(),
     //   about: joi.string().required(),
     // });
     // const { error } = schema.validate(req.body);

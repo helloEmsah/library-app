@@ -62,6 +62,7 @@ function Login(props) {
         history.push("/home");
       }
     } catch (error) {
+      console.log(error);
       dispatch({
         type: "LOGIN_FAIL",
       });

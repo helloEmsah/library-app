@@ -109,20 +109,20 @@ exports.Login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // const schema = joi.object({
-    //   email: joi.string().email().min(5).required(),
-    //   password: joi.string().min(8).required(),
-    // });
+    const schema = joi.object({
+      email: joi.string().email().min(5).required(),
+      password: joi.string().min(8).required(),
+    });
 
-    // const { error } = schema.validate(req.body);
+    const { error } = schema.validate(req.body);
 
-    // if (error) {
-    //   return res.status(400).send({
-    //     error: {
-    //       message: error.details[0].message,
-    //     },
-    //   });
-    // }
+    if (error) {
+      return res.status(400).send({
+        error: {
+          message: error.details[0].message,
+        },
+      });
+    }
 
     const user = await User.findOne({
       where: {

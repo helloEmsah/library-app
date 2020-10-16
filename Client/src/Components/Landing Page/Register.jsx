@@ -2,10 +2,11 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { LoginContext } from "../../Context/LoginContext";
 import { API, setAuthToken } from "../../Config/api";
+import { useMutation } from "react-query";
 import { Button, Form, Modal } from "react-bootstrap";
 import style from "../../Styles/styles";
 
-function Register(props) {
+function Register() {
   const history = useHistory();
   const [state, dispatch] = useContext(LoginContext);
   const [show, setShow] = useState(false);
@@ -19,12 +20,53 @@ function Register(props) {
     address: "",
   });
 
-  const { email, password, fullName, phone, address } = formRegister;
+  const { email, password, fullName, gender, phone, address } = formRegister;
 
   const handleChange = (e) => {
     setFormRegister({ ...formRegister, [e.target.name]: e.target.value });
   };
 
+  const [register] = useMutation(async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const body = JSON.stringify(formRegister);
+
+      const res = await API.post("/register", body, config);
+
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: res.data.data,
+      });
+
+      console.log(res);
+
+      setAuthToken(res.data.data.token);
+
+      try {
+        const res = await API.get("/auth");
+
+        dispatch({
+          type: "USER_LOADED",
+          payload: res.data.data.user,
+        });
+      } catch (error) {
+        dispatch({
+          type: "AUTH_ERROR",
+        });
+      }
+
+      history.push("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  // Modal Handle
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
@@ -41,7 +83,12 @@ function Register(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              register();
+            }}
+          >
             <Form.Group controlId="userEmail">
               <Form.Control
                 style={{
@@ -51,7 +98,10 @@ function Register(props) {
                   borderColor: "black",
                 }}
                 type="email"
+                name="email"
                 placeholder="Email"
+                value={email}
+                onChange={(e) => handleChange(e)}
               />
             </Form.Group>
             <Form.Group controlId="userPassword">
@@ -63,7 +113,10 @@ function Register(props) {
                   borderColor: "black",
                 }}
                 type="password"
+                name="password"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => handleChange(e)}
               />
             </Form.Group>
             <Form.Group controlId="userFullName">
@@ -75,7 +128,10 @@ function Register(props) {
                   borderColor: "black",
                 }}
                 type="text"
+                name="fullName"
                 placeholder="Full Name"
+                value={fullName}
+                onChange={(e) => handleChange(e)}
               />
             </Form.Group>
             <Form.Group controlId="userGender">
@@ -87,6 +143,9 @@ function Register(props) {
                   borderColor: "black",
                 }}
                 as="select"
+                name="gender"
+                value={gender}
+                onChange={(e) => handleChange(e)}
                 defaultValue="Gender"
               >
                 <option>Male</option>
@@ -102,7 +161,10 @@ function Register(props) {
                   borderColor: "black",
                 }}
                 type="text"
+                name="phone"
                 placeholder="Phone"
+                value={phone}
+                onChange={(e) => handleChange(e)}
               />
             </Form.Group>
             <Form.Group controlId="userAddress">
@@ -114,13 +176,19 @@ function Register(props) {
                   borderColor: "black",
                 }}
                 type="text"
+                name="address"
                 placeholder="Address"
+                value={address}
+                onChange={(e) => handleChange(e)}
               />
             </Form.Group>
+
+            <Form.Group>
+              <Button block type="submit" style={style.orangeButton}>
+                Sign Up
+              </Button>
+            </Form.Group>
           </Form>
-          <Button block style={style.orangeButton}>
-            Sign Up
-          </Button>
           <br />
           <p id="modalRegularText">
             Already have an account? Click

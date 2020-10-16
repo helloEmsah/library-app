@@ -4,11 +4,11 @@ Content-Type: application/json
 
 {
   "fullName": "Prinz Eugen",
-  "email"   : "test12@root.com",
-  "password" : "thisisroot",
+  "email"   : "flatisjustice@root.com",
+  "password" : "thisisuser",
   "gender": "Female",
-  "phone": "08123456789",
-  "address": "Kiel, Germany, Kiel"
+  "phone": "08123456784",
+  "address": "Jl Pegangsaan Timur no 56"
 }
 
 ###
@@ -19,8 +19,8 @@ Content-Type: application/json
 //Authorization: 
 
 {
-  "email"   : "admin@root.com",
-  "password" : "thisisroot"
+  "email"   : "flatisjustice@root.com",
+  "password" : "thisisuser"
 }
 
 ###
@@ -32,13 +32,13 @@ Content-Type: application/json
 ###
 
 # @name getUser
-GET http://localhost:5000/api/v1/user/5
+GET http://localhost:5000/api/v1/user/3
 Content-Type: application/json
 
 ###
 
 # @name deleteUser
-DELETE http://localhost:5000/api/v1/user/2
+DELETE http://localhost:5000/api/v1/user/3
 Content-Content-Type: application/json
 
 ###
@@ -50,7 +50,7 @@ Content-Type: application/json
 ###
 
 # @name getCategory
-GET http://localhost:5000/api/v1/category/9
+GET http://localhost:5000/api/v1/category/6
 Content-Type: applicaton/json
 
 ###
@@ -58,16 +58,16 @@ Content-Type: applicaton/json
 # @name addCategory
 POST http://localhost:5000/api/v1/category
 Content-Type: application/json 
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4NTUyfQ.YWsOeikkf3-fvwTKRw5OhNLLi4SbzVxZlbd7Zl7WnMA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyODM4NjE0fQ.VRCFWt_2wnsBBodMRep7q2hjUkvL6rEH5vYRvFfLAwA
 
 {
-  "name": "Comedy"
+  "name": "Adult"
 }
 
 ###
 
 # @name editCategory
-PATCH http://localhost:5000/api/v1/category/7
+PATCH http://localhost:5000/api/v1/category/6
 Content-Type: application/json 
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4NTUyfQ.YWsOeikkf3-fvwTKRw5OhNLLi4SbzVxZlbd7Zl7WnMA
 
@@ -78,9 +78,9 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4
 ###
 
 # @name deleteCategory
-DELETE  http://localhost:5000/api/v1/category/9
+DELETE  http://localhost:5000/api/v1/category/5
 Content-Type: application/json 
-//Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4NTUyfQ.YWsOeikkf3-fvwTKRw5OhNLLi4SbzVxZlbd7Zl7WnMA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyODE1MjYzfQ.3qykrSRHeGIxs4kxVA2Mcqsb6GUZ9R_PEUGaxSwkpbU
 
 ###
 
@@ -99,16 +99,16 @@ Content-Type: application/json
 # @name addBook
 POST http://localhost:5000/api/v1/book
 Content-Type: application/json 
-//Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4NTUyfQ.YWsOeikkf3-fvwTKRw5OhNLLi4SbzVxZlbd7Zl7WnMA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyODE1MjYzfQ.3qykrSRHeGIxs4kxVA2Mcqsb6GUZ9R_PEUGaxSwkpbU
 
 {
-	"title": "How to Train Your Dragon",
-	"author": "Willy Wonka",
-	"publication": "April 2001",
+	"title": "The Legend of Korra",
+	"author": "Voldermort",
+	"publication": "May 2005",
 	"categoryId": 4,
-	"userId": 4,
-	"page": "195",
-	"isbn": 451234,
+	"userId": 3,
+	"page": "451",
+	"isbn": 45123,
 	"about": "Lorem Ipsum, this is just a dummy. There's nothing to see here, really.",
 	"file": "howToTrainYourDragon.epub",
 	"thumbnail": "howToTrainYourDragon.jpg",
@@ -118,9 +118,9 @@ Content-Type: application/json
 ###
 
 # @name editBook
-PATCH  http://localhost:5000/api/v1/book/13
+PATCH  http://localhost:5000/api/v1/book/1
 Content-Type: application/json 
-//Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4NTUyfQ.YWsOeikkf3-fvwTKRw5OhNLLi4SbzVxZlbd7Zl7WnMA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4NTUyfQ.YWsOeikkf3-fvwTKRw5OhNLLi4SbzVxZlbd7Zl7WnMA
 
 {
 	"title": "How to Install RAM",
@@ -141,6 +141,6 @@ Content-Type: application/json
 # @name deleteBook
 DELETE  http://localhost:5000/api/v1/book/13
 Content-Type: application/json 
-//Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4NTUyfQ.YWsOeikkf3-fvwTKRw5OhNLLi4SbzVxZlbd7Zl7WnMA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4NTUyfQ.YWsOeikkf3-fvwTKRw5OhNLLi4SbzVxZlbd7Zl7WnMA
 
 ###

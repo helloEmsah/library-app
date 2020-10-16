@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Button, Container, DropdownButton, Form } from "react-bootstrap";
 import { TiDocumentAdd } from "react-icons/ti";
+import { LoginContext } from "../Context/LoginContext";
+import { useMutation } from "react-query";
+import { API } from "../Config/api";
 import style from "../Styles/styles";
 
 function AddBook() {
+  const [state, dispatch] = useContext(LoginContext);
+
+  const [formData, setFormData] = useState({
+    userId: `${state.user.id}`,
+    title: "",
+    publication: "",
+    category: "",
+    page: "",
+    isbn: "",
+    about: "",
+    file: "",
+    status: "Waiting",
+    thumbnail: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   return (
     <>
       <Container fluid>
