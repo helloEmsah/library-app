@@ -38,10 +38,10 @@ module.exports = {
         onDelete: "CASCADE",
       },
       page: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       isbn: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       about: {
         type: Sequelize.STRING,

@@ -32,12 +32,10 @@ function App() {
           type: "USER_LOADED",
           payload: res.data.data.user,
         });
-        console.log(res);
       } catch (error) {
         dispatch({
           type: "AUTH_ERROR",
         });
-        console.log(error);
       }
     };
     loadUser();

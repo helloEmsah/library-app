@@ -10,7 +10,7 @@ exports.getAllCategory = async (req, res) => {
 
     return res.status(200).send({
       message: "All existing category has been loaded successfully",
-      data: category,
+      data: { category },
     });
   } catch (error) {
     console.log(error);
@@ -35,7 +35,7 @@ exports.getCategory = async (req, res) => {
     if (category) {
       return res.status(200).send({
         message: "Category has been loaded",
-        data: category,
+        data: { category },
       });
     } else {
       return res.status(404).send({
@@ -57,7 +57,7 @@ exports.addCategory = async (req, res) => {
 
     return res.status(200).send({
       message: "Category added successfully",
-      data: category,
+      data: { category },
     });
   } catch (error) {
     console.log(error);
@@ -88,7 +88,7 @@ exports.updateCategory = async (req, res) => {
       });
       return res.status(200).send({
         message: "Category has been updated!",
-        data: updatedCategory,
+        data: { updatedCategory },
       });
     } else {
       return res.status(404).send({

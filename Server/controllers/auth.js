@@ -44,7 +44,7 @@ exports.Register = async (req, res) => {
       password: joi.string().min(8).required(),
       gender: joi.string().min(4).required(),
       phone: joi.number().min(6).required(),
-      address: joi.string().min(10).required(),
+      address: joi.string().required(),
     });
     const { error } = schema.validate(req.body);
     if (error) {

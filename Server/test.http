@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "fullName": "Prinz Eugen",
-  "email"   : "flatisjustice@root.com",
+  "email"   : "prinzEugen@root.com",
   "password" : "thisisuser",
   "gender": "Female",
   "phone": "08123456784",
@@ -19,7 +19,7 @@ Content-Type: application/json
 //Authorization: 
 
 {
-  "email"   : "flatisjustice@root.com",
+  "email"   : "prinzEugen@root.com",
   "password" : "thisisuser"
 }
 
@@ -61,7 +61,7 @@ Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyODM4NjE0fQ.VRCFWt_2wnsBBodMRep7q2hjUkvL6rEH5vYRvFfLAwA
 
 {
-  "name": "Adult"
+  "name": "Fantasy"
 }
 
 ###
@@ -91,7 +91,7 @@ Content-Type: application/json
 ###
 
 # @name getBook
-GET http://localhost:5000/api/v1/book/1
+GET http://localhost:5000/api/v1/book/2
 Content-Type: application/json
 
 ###
@@ -102,17 +102,17 @@ Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyODE1MjYzfQ.3qykrSRHeGIxs4kxVA2Mcqsb6GUZ9R_PEUGaxSwkpbU
 
 {
-	"title": "The Legend of Korra",
-	"author": "Voldermort",
-	"publication": "May 2005",
-	"categoryId": 4,
-	"userId": 3,
-	"page": "451",
-	"isbn": 45123,
+	"title": "How to Train Your Dragon",
+	"author": "Admiral Hipper",
+	"publication": "May 2020",
+	"categoryId": 3,
+	"userId": 2,
+	"page": 123,
+	"isbn": 15423122451,
 	"about": "Lorem Ipsum, this is just a dummy. There's nothing to see here, really.",
 	"file": "howToTrainYourDragon.epub",
 	"thumbnail": "howToTrainYourDragon.jpg",
-	"status": "null"
+	"status": "Waiting"
 }
 
 ###

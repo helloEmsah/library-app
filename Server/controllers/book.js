@@ -42,7 +42,7 @@ exports.getAllBook = async (req, res) => {
 
     return res.status(200).send({
       message: "All existing book has been loaded",
-      data: book,
+      data: { book },
     });
   } catch (error) {
     console.log(error);
@@ -97,7 +97,7 @@ exports.getBook = async (req, res) => {
     if (book) {
       return res.status(200).send({
         message: "Book has been loaded",
-        data: book,
+        data: { book },
       });
     } else {
       return res.status(404).send({
@@ -193,7 +193,7 @@ exports.addBook = async (req, res) => {
       });
       return res.status(200).send({
         message: "Book added",
-        data: bookResult,
+        data: { bookResult },
       });
     }
   } catch (error) {
@@ -255,7 +255,7 @@ exports.updateBook = async (req, res) => {
       });
       return res.status(200).send({
         message: "Book has been updated",
-        data: updatedBook,
+        data: { updatedBook },
       });
     } else {
       return res.status(404).send({

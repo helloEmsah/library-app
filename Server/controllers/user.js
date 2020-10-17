@@ -10,7 +10,7 @@ exports.getAllUser = async (req, res) => {
 
     return res.status(200).send({
       message: "All existing user has been loaded successfully!",
-      data: user,
+      data: { user },
     });
   } catch (error) {
     console.log(error);
@@ -35,7 +35,7 @@ exports.getUser = async (req, res) => {
     if (user) {
       return res.status(200).send({
         message: `User has been loaded successfully`,
-        data: user,
+        data: { user },
       });
     } else {
       return res.status(404).send({
