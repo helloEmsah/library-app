@@ -13,10 +13,14 @@ import fakeProfile from "../Dummy/Profile.json";
 function Profile() {
   const [state, dispatch] = useContext(LoginContext);
 
-  const { isLoading, error, data: profileData, refetch } = useQuery(
-    "getUser",
-    () => API.get(`/user/${state.user.id}`)
-  );
+  const id = localStorage.getItem("id");
+
+  const {
+    isLoading,
+    error,
+    data: profileData,
+    refetch,
+  } = useQuery("getUserById", () => API.get(`/user/${id}`));
 
   return isLoading || !profileData ? (
     <h1>Loading...</h1>
@@ -35,15 +39,13 @@ function Profile() {
               <MdLocationOn className="profileIcon" />
             </Col>
             <Col lg={7}>
-              <p className="profileName">
-                {profileData.data.data.detail.email}
-              </p>
+              <p className="profileName">{profileData.data.data.email}</p>
               <p className="profileDesc">Email</p>
-              <p className="profileName"></p>
+              <p className="profileName">{profileData.data.data.gender}</p>
               <p className="profileDesc">Gender</p>
-              <p className="profileName"></p>
+              <p className="profileName">{profileData.data.data.phone}</p>
               <p className="profileDesc">Phone</p>
-              <p className="profileName"></p>
+              <p className="profileName">{profileData.data.data.address}</p>
               <p className="profileDesc">Address</p>
             </Col>
             <Col lg={4}>

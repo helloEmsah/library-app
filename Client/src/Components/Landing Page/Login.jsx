@@ -3,9 +3,10 @@ import { Button, Modal, Form } from "react-bootstrap";
 import { LoginContext } from "../../Context/LoginContext";
 import { Link, useHistory } from "react-router-dom";
 import { API, setAuthToken } from "../../Config/api";
+import { useQuery, useMutation } from "react-query";
 import style from "../../Styles/styles";
 
-function Login(props) {
+function Login() {
   const history = useHistory();
   const [state, dispatch] = useContext(LoginContext);
 
@@ -129,7 +130,7 @@ function Login(props) {
           <br />
           <p id="modalRegularText">
             Don't have an account yet? Click
-            <Link onClick={props.onClickSignUp}>
+            <Link to="/">
               <span style={{ fontWeight: 800 }}> here</span>
             </Link>
           </p>

@@ -2,18 +2,20 @@ import React, { useContext, useState } from "react";
 import { Button, Container, DropdownButton, Form } from "react-bootstrap";
 import { TiDocumentAdd } from "react-icons/ti";
 import { LoginContext } from "../Context/LoginContext";
-import { useMutation } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import { API } from "../Config/api";
 import style from "../Styles/styles";
 
 function AddBook() {
+  const [addBookModal, setAddBookModal] = useState(false);
   const [state, dispatch] = useContext(LoginContext);
 
   const [formData, setFormData] = useState({
-    userId: `${state.user.id}`,
+    userId: `${state.user?.id}`,
+    categoryId: "",
     title: "",
+    author: "",
     publication: "",
-    category: "",
     page: "",
     isbn: "",
     about: "",
@@ -22,11 +24,81 @@ function AddBook() {
     thumbnail: "",
   });
 
+  const {
+    userId,
+    categoryId,
+    title,
+    author,
+    publication,
+    page,
+    isbn,
+    about,
+    file,
+    status,
+    thumbnail,
+  } = formData;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  return (
+  const {
+    isLoading,
+    error,
+    data: categoryData,
+    refetch,
+  } = useQuery("getCategory", () => API.get("/category"));
+
+  const [addBook] = useMutation(async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const body = JSON.stringify({
+        userId,
+        categoryId,
+        title,
+        author,
+        publication,
+        page,
+        isbn,
+        about,
+        file,
+        status,
+        thumbnail,
+      });
+
+      const res = await API.post("/book", body, config);
+
+      setFormData({
+        userId: `${state.user?.id}`,
+        categoryId: "",
+        title: "",
+        author: "",
+        publication: "",
+        page: "",
+        isbn: "",
+        about: "",
+        file: "",
+        status: "Waiting",
+        thumbnail: "",
+      });
+
+      setAddBookModal(true);
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  return isLoading || !categoryData ? (
+    <h1>Loading...</h1>
+  ) : error ? (
+    <h1>Your error: {error.message}</h1>
+  ) : (
     <>
       <Container fluid>
         <h1
@@ -39,27 +111,112 @@ function AddBook() {
         >
           Add Book
         </h1>
-        <Form>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            addBook();
+            refetch();
+          }}
+        >
           <Form.Group>
-            <Form.Control type="text" placeholder="Title" />
+            <Form.Control
+              type="text"
+              placeholder="Title"
+              name="title"
+              value={title}
+              onChange={(e) => handleChange(e)}
+            />
           </Form.Group>
           <Form.Group>
-            <Form.Control type="text" placeholder="Publication Date" />
+            <Form.Control
+              type="text"
+              placeholder="Publication Date"
+              name="publication"
+              value={publication}
+              onChange={(e) => handleChange(e)}
+            />
+          </Form.Group>
+          {/* DONT FORGET ADD AUTHOR */}
+          <Form.Group>
+            <Form.Control
+              as="select"
+              type="text"
+              placeholder="Category"
+              name="categoryId"
+              value={categoryId}
+              onChange={(e) => handleChange(e)}
+              required
+            >
+              <option value="">Category</option>
+              {categoryData.data.data.category.map((category) => (
+                <option value={category.id}>{category.name}</option>
+              ))}
+            </Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Control type="text" placeholder="Category" />
+            <Form.Control
+              type="text"
+              placeholder="Page"
+              name="page"
+              value={page}
+              onChange={(e) => handleChange(e)}
+            />
           </Form.Group>
           <Form.Group>
-            <Form.Control type="text" placeholder="Page" />
-          </Form.Group>
-          <Form.Group>
-            <Form.Control type="text" placeholder="ISBN" />
+            <Form.Control
+              type="text"
+              placeholder="ISBN"
+              name="isbn"
+              value={isbn}
+              onChange={(e) => handleChange(e)}
+            />
           </Form.Group>
           <Form.Group>
             <Form.Control
               as="textarea"
               rows="5"
               placeholder="About this book"
+              name="about"
+              value={about}
+              onChange={(e) => handleChange(e)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              placeholder="File"
+              name="file"
+              value={file}
+              onChange={(e) => handleChange(e)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              placeholder="Thumbnail"
+              name="thumbnail"
+              value={thumbnail}
+              onChange={(e) => handleChange(e)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              placeholder="userIdl"
+              name="userId"
+              value={userId}
+              onChange={(e) => handleChange(e)}
+              hidden
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              placeholder="status"
+              name="status"
+              value={status}
+              onChange={(e) => handleChange(e)}
+              hidden
             />
           </Form.Group>
           <div className="d-flex justify-content-between">
@@ -69,7 +226,11 @@ function AddBook() {
               </form>
             </DropdownButton>
 
-            <Button style={style.orangeButton}>
+            <Button
+              type="submit"
+              style={style.orangeButton}
+              onClick={() => setAddBookModal(true)}
+            >
               Submit Book <TiDocumentAdd />
             </Button>
           </div>

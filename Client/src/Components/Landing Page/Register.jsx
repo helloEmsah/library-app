@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { LoginContext } from "../../Context/LoginContext";
 import { API, setAuthToken } from "../../Config/api";
-import { useMutation } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import { Button, Form, Modal } from "react-bootstrap";
 import style from "../../Styles/styles";
 
@@ -146,10 +146,10 @@ function Register() {
                 name="gender"
                 value={gender}
                 onChange={(e) => handleChange(e)}
-                defaultValue="Gender"
               >
-                <option>Male</option>
-                <option>Female</option>
+                <option>Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="userPhone">
