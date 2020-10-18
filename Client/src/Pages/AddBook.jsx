@@ -1,17 +1,23 @@
-import React, { useContext, useState } from "react";
-import { Button, Container, DropdownButton, Form } from "react-bootstrap";
+import React, { useState } from "react";
+import {
+  Button,
+  Container,
+  DropdownButton,
+  Form,
+  Modal,
+} from "react-bootstrap";
 import { TiDocumentAdd } from "react-icons/ti";
-import { LoginContext } from "../Context/LoginContext";
 import { useQuery, useMutation } from "react-query";
 import { API } from "../Config/api";
 import style from "../Styles/styles";
 
 function AddBook() {
   const [addBookModal, setAddBookModal] = useState(false);
-  const [state, dispatch] = useContext(LoginContext);
+
+  const userStateId = localStorage.getItem("id");
 
   const [formData, setFormData] = useState({
-    userId: `${state.user?.id}`,
+    userId: `${userStateId}`,
     categoryId: "",
     title: "",
     author: "",
@@ -74,7 +80,7 @@ function AddBook() {
       const res = await API.post("/book", body, config);
 
       setFormData({
-        userId: `${state.user?.id}`,
+        userId: `${userStateId}`,
         categoryId: "",
         title: "",
         author: "",
@@ -136,7 +142,15 @@ function AddBook() {
               onChange={(e) => handleChange(e)}
             />
           </Form.Group>
-          {/* DONT FORGET ADD AUTHOR */}
+          <Form.Group>
+            <Form.Control
+              type="text"
+              placeholder="Author"
+              name="author"
+              value={author}
+              onChange={(e) => handleChange(e)}
+            />
+          </Form.Group>
           <Form.Group>
             <Form.Control
               as="select"
@@ -235,6 +249,24 @@ function AddBook() {
             </Button>
           </div>
         </Form>
+        <Modal
+          size="lg"
+          show={addBookModal}
+          onHide={() => setAddBookModal(false)}
+        >
+          <Modal.Body>
+            <div
+              className="addModalBook"
+              style={{
+                fontSize: 18,
+                textAlign: "center",
+              }}
+            >
+              <p>Thank you for adding your own book</p>
+              <p>please wait 1 x 24 hours for our admin to verify </p>
+            </div>
+          </Modal.Body>
+        </Modal>
       </Container>
     </>
   );

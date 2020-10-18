@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
-import fakeBook from "../Dummy/Book.json";
 import { Card, Col, Row, Container } from "react-bootstrap";
+import { LoginContext } from "../Context/LoginContext";
+import Spinner from "../Components/Spinner";
+import { useQuery } from "react-query";
+import { API } from "../Config/api";
 
 function MyLibrary() {
   const { id } = useParams();
   const history = useHistory();
-  const data = fakeBook.filter((item) => item.id === parseInt(id));
+  const [state, dispatch] = useContext(LoginContext);
 
-  return (
+  const { isLoading, error, data: bookData, refetch } = useQuery(
+    "getLibrary",
+    () => API.get(`/library`)
+  );
+
+  return isLoading || !bookData ? (
+    <Spinner />
+  ) : (
     <Container>
       <h1
-        style={{ fontFamily: 'Times New Roman',
+        style={{
+          fontFamily: "Times New Roman",
           fontWeight: "bold",
           fontSize: 30,
           lineHeight: "37px",
@@ -22,18 +33,18 @@ function MyLibrary() {
       <Card style={{ border: "none" }}>
         <Card.Body>
           <Row>
-            {fakeBook.map((data) => (
+            {bookData.data.data.book.map((book) => (
               <Col lg={3}>
                 <Link
                   style={{ textDecoration: "none" }}
-                  onClick={() => history.push(`/detailbook/${data.id}`)}
+                  onClick={() => history.push(`/detailbook/${book.bookId}`)}
                 >
                   <Card border="dark" id="bookImageCard">
                     <Card.Body style={{ padding: 0 }}>
                       <div class="bookImageContainer">
                         <img
                           className="bookImage"
-                          src={data.image}
+                          src={book.image}
                           alt=""
                           srcset=""
                         />
@@ -42,9 +53,9 @@ function MyLibrary() {
                   </Card>
                   <div id="bookCardDescription">
                     <p style={{ color: "black" }} className="bookTitle">
-                      {data.title}
+                      {book.title}
                     </p>
-                    <p className="bookAuthor">{data.author}</p>
+                    <p className="bookAuthor">{book.author}</p>
                   </div>
                 </Link>
               </Col>

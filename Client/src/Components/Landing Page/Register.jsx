@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { LoginContext } from "../../Context/LoginContext";
 import { API, setAuthToken } from "../../Config/api";
-import { useQuery, useMutation } from "react-query";
+import { useMutation } from "react-query";
 import { Button, Form, Modal } from "react-bootstrap";
 import style from "../../Styles/styles";
 

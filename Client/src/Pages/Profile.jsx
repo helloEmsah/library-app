@@ -1,29 +1,20 @@
-import React, { useContext, useState, useEffect } from "react";
+import React from "react";
 import { Container, Col, Row, DropdownButton } from "react-bootstrap";
 import { MdEmail, MdLocationOn } from "react-icons/md";
 import { FaTransgender, FaPhoneAlt } from "react-icons/fa";
-import { LoginContext } from "../Context/LoginContext";
+import Spinner from "../Components/Spinner";
 import { useQuery } from "react-query";
 import { API } from "../Config/api";
 
-// ?? "default"
-
-import fakeProfile from "../Dummy/Profile.json";
-
 function Profile() {
-  const [state, dispatch] = useContext(LoginContext);
-
   const id = localStorage.getItem("id");
 
-  const {
-    isLoading,
-    error,
-    data: profileData,
-    refetch,
-  } = useQuery("getUserById", () => API.get(`/user/${id}`));
+  const { isLoading, error, data: profileData } = useQuery("getUserById", () =>
+    API.get(`/user/${id}`)
+  );
 
   return isLoading || !profileData ? (
-    <h1>Loading...</h1>
+    <Spinner />
   ) : error ? (
     <h1>Your Error : {error.message}</h1>
   ) : (
@@ -50,7 +41,11 @@ function Profile() {
             </Col>
             <Col lg={4}>
               <div className="profilePictureContainer">
-                <img className="profilePictureImage" src="" alt="" />
+                <img
+                  className="profilePictureImage"
+                  src={profileData.data.data.picture}
+                  alt=""
+                />
               </div>
               <br />
               <DropdownButton variant="danger" title="Upload Profile Image">

@@ -133,7 +133,7 @@ exports.addBook = async (req, res) => {
     //   author: joi.string().min(3).required(),
     //   publication: joi.string().min(3).required(),
     //   categoryId: joi.required(),
-    //   page: joi.string(),
+    //   page: joi.number(),
     //   isbn: joi.number(),
     //   about: joi.string().required(),
     // });

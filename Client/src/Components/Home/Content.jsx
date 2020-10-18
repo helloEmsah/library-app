@@ -1,15 +1,37 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Card, Row, Col, Container, Dropdown } from "react-bootstrap";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { API } from "../../Config/api";
+import { useQuery, useMutation } from "react-query";
 import homeHeroImage from "../../Images/homeHeroImage.png";
-import listBook from "../../Dummy/Book.json";
 
 function Content() {
-  const { id } = useParams();
   const history = useHistory();
-  const data = listBook.filter((item) => item.id === parseInt(id));
 
-  return (
+  const [categoryId, setCategoryId] = useState("");
+
+  const { isLoading, error, data: bookData, refetch } = useQuery(
+    "getBook",
+    () => API.get(`/book/${categoryId}`)
+  );
+
+  const { data: categoryData } = useQuery("getCategory", () =>
+    API.get("/category")
+  );
+
+  const { data: categorySelector } = useQuery("getCategorySelector", () =>
+    API.get(`/category/${categoryId}`)
+  );
+
+  const [reload] = useMutation(async () => {
+    refetch();
+  });
+
+  return isLoading || !bookData || !categoryData || !categorySelector ? (
+    <h1>Loading...</h1>
+  ) : error ? (
+    <h1>Your Error : {error.message}</h1>
+  ) : (
     <div>
       <Container>
         <div id="homeHeroImageContainer">
@@ -34,40 +56,52 @@ function Content() {
                 Filter{" "}
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item href="#">Romance</Dropdown.Item>
-                <Dropdown.Item href="#">Computer</Dropdown.Item>
-                <Dropdown.Item href="#">Sci-Fi</Dropdown.Item>
-                <Dropdown.Item href="#">History</Dropdown.Item>
-                <Dropdown.Item href="#">Biography</Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => {
+                    setCategoryId("");
+                    reload();
+                  }}
+                >
+                  Clear Filter
+                </Dropdown.Item>
+                {categoryData.data.data.category.map((category) => (
+                  <Dropdown.Item
+                    onClick={() => {
+                      setCategoryId(category.id);
+                      reload();
+                    }}
+                  >
+                    {category.name}
+                  </Dropdown.Item>
+                ))}
               </Dropdown.Menu>
             </Dropdown>
           </div>
           <Card style={{ border: "none" }}>
             <Card.Body>
               <Row>
-                {listBook.map((data) => (
+                {bookData.data.data.book.map((book) => (
                   <Col lg={3}>
                     <Link
                       style={{ textDecoration: "none" }}
-                      onClick={() => history.push(`/detailbook/${data.id}`)}
+                      onClick={() => history.push(`/detailbook/${book.id}`)}
                     >
                       <Card border="dark" id="bookImageCard">
                         <Card.Body style={{ padding: 0 }}>
                           <div class="bookImageContainer">
                             <img
                               className="bookImage"
-                              src={data.image}
+                              src={book.thumbnail}
                               alt=""
-                              srcset=""
                             />
                           </div>
                         </Card.Body>
                       </Card>
                       <div id="bookCardDescription">
                         <p style={{ color: "black" }} className="bookTitle">
-                          {data.title}
+                          {book.title}
                         </p>
-                        <p className="bookAuthor">{data.author}</p>
+                        <p className="bookAuthor">{book.author}</p>
                       </div>
                     </Link>
                   </Col>

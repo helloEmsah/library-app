@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import iconHeader from "../Images/iconHeader.png";
 import headerLanding from "../Images/headerLanding.png";
 import subHeaderLanding from "../Images/subHeaderLanding.png";

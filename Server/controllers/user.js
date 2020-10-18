@@ -33,21 +33,16 @@ exports.getUser = async (req, res) => {
         exclude: ["createdAt", "updatedAt"],
       },
     });
-    // if (user) {
-    //   return res.status(200).send({
-    //     message: `User has been loaded successfully`,
-    //     data: { user },
-    //   });
-    // } else {
-    //   return res.status(404).send({
-    //     message: "User didn't exist",
-    //   });
-    // }
-
-    res.send({
-      message: "User with corresponding id has been loaded",
-      data: user,
-    });
+    if (user) {
+      return res.status(200).send({
+        message: "User with corresponding id has been loaded",
+        data: user,
+      });
+    } else {
+      return res.status(404).send({
+        message: "User didn't exist",
+      });
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).send({
@@ -82,6 +77,57 @@ exports.deleteUser = async (req, res) => {
         message: "User didn't exist",
       });
     }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      error: {
+        message: "Internal Server Error",
+      },
+    });
+  }
+};
+
+exports.uploadProfileImg = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.user.id,
+      },
+    });
+
+    if (!user) {
+      res.status(404).send({ error: { message: "User not found" } });
+    }
+    const updateProfile = await User.update(
+      {
+        profile: req.file.filename,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+
+    if (!updateProfile)
+      return res.status(400).send({
+        message: "Please try again",
+      });
+
+    const userResult = await User.findOne({
+      where: {
+        id,
+      },
+
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
+
+    res.send({
+      message: "Successfully Upload Profile Image",
+      data: userResult,
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).send({

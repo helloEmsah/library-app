@@ -1,11 +1,23 @@
 const express = require("express");
 const router = express.Router();
 
-const { authentication } = require("../middleware/auth");
-
-const { getAllUser, getUser, deleteUser } = require("../controllers/user");
+const { authentication, authAdmin } = require("../middleware/auth");
+const { uploadProfile } = require("../middleware/uploadProfile");
+const {
+  getAllUser,
+  getUser,
+  deleteUser,
+  uploadProfileImg,
+} = require("../controllers/user");
 
 const { Register, Login, checkAuth } = require("../controllers/auth");
+
+const {
+  getAllLibrary,
+  getLibrary,
+  addLibrary,
+  deleteLibrary,
+} = require("../controllers/library");
 
 const {
   getAllBook,
@@ -32,6 +44,12 @@ router.get("/auth", authentication, checkAuth);
 router.get("/user", getAllUser);
 router.get("/user/:id", getUser);
 router.delete("/user/:id", deleteUser);
+router.post(
+  "/user/uploadimage",
+  authentication,
+  uploadProfile("profileImg"),
+  uploadProfileImg
+);
 
 // CATEGORY ROUTE
 router.get("/category", getAllCategory);
@@ -46,5 +64,11 @@ router.get("/book/:id", getBook);
 router.post("/book", authentication, addBook);
 router.patch("/book/:id", authentication, updateBook);
 router.delete("/book/:id", authentication, deleteBook);
+
+// LIBRARY ROUTE
+router.get("/library", getAllLibrary);
+router.get("/library/:id", getLibrary);
+router.post("/library", addLibrary);
+router.delete("/library/:id", deleteLibrary);
 
 module.exports = router;

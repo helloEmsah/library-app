@@ -3,7 +3,6 @@ import { Button, Modal, Form } from "react-bootstrap";
 import { LoginContext } from "../../Context/LoginContext";
 import { Link, useHistory } from "react-router-dom";
 import { API, setAuthToken } from "../../Config/api";
-import { useQuery, useMutation } from "react-query";
 import style from "../../Styles/styles";
 
 function Login() {
@@ -57,7 +56,7 @@ function Login() {
         });
       }
 
-      if (email == "admin@root.com") {
+      if (email === "admin@root.com") {
         history.push("/admin");
       } else {
         history.push("/home");

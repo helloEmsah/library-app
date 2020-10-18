@@ -4,24 +4,37 @@ import { FaUser } from "react-icons/fa";
 import { MdLibraryBooks } from "react-icons/md";
 import { AiFillFileAdd } from "react-icons/ai";
 import { RiLogoutBoxRFill } from "react-icons/ri";
+import { useQuery } from "react-query";
+import Spinner from "../Spinner";
 import { LoginContext } from "../../Context/LoginContext";
-
-import fakePicture from "../../Dummy/Profile.json";
+import { API } from "../../Config/api";
 
 function Sidebar() {
   const [state, dispatch] = useContext(LoginContext);
-  return (
+  const id = localStorage.getItem("id");
+
+  const { isLoading, error, data: userData } = useQuery("getImage", () =>
+    API.get(`/user/${id}`)
+  );
+
+  return isLoading || !userData ? (
+    <Spinner />
+  ) : error ? (
+    <h1>Your Error : {error.message}</h1>
+  ) : (
     <div>
-      {fakePicture.map((data) => (
-        <div id="userInfo">
-          <div id="sidebarProfileImageContainer">
-            <img className="sidebarProfileImage" src={data.picture} alt="" />
-          </div>
-          <div className="userInfoName">
-            <h1>{data.name}</h1>
-          </div>
+      <div id="userInfo">
+        <div id="sidebarProfileImageContainer">
+          <img
+            className="sidebarProfileImage"
+            src={userData.data.data.picture}
+            alt=""
+          />
         </div>
-      ))}
+        <div className="userInfoName">
+          <h1>{userData.data.data.fullName}</h1>
+        </div>
+      </div>
 
       <hr />
       <div id="sidebarLink">

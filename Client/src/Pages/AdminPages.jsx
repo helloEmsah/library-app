@@ -1,10 +1,69 @@
 import React from "react";
-import { Dropdown, DropdownButton, Table, Container } from "react-bootstrap";
+import { Table, Container, Button } from "react-bootstrap";
 import TopNavAdmin from "../Components/Home/TopNavAdmin";
-import transactionData from "../Dummy/Transaction.json";
+import { API } from "../Config/api";
+import { useQuery, useMutation } from "react-query";
+import Spinner from "../Components/Spinner";
 
 function AdminPages() {
-  return (
+  const userStateId = localStorage.getItem("id");
+
+  const { data: categoryData } = useQuery("getCategory", () =>
+    API.get("/category")
+  );
+
+  const { isLoading, error, data: bookData, refetch } = useQuery(
+    "getBook",
+    () => API.get("/book")
+  );
+
+  const [approveBook] = useMutation(async (id) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const body = JSON.stringify({
+        status: "Approve",
+      });
+
+      const res = await API.patch(`/book/${id}`, body, config);
+      refetch();
+      return res;
+    } catch (error) {
+      refetch();
+      console.log(error);
+    }
+  });
+
+  const [cancelBook] = useMutation(async (id) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const body = JSON.stringify({
+        status: "Cancel",
+      });
+
+      const res = await API.patch(`/book/${id}`, body, config);
+      refetch();
+      return res;
+    } catch (error) {
+      refetch();
+      console.log(error);
+    }
+  });
+
+  return isLoading || !bookData ? (
+    <Spinner />
+  ) : error ? (
+    <h1>Your error: {error.message}</h1>
+  ) : (
     <div id="admingPagesWrapper">
       <TopNavAdmin />
       <br />
@@ -16,56 +75,73 @@ function AdminPages() {
           <Table borderless hover>
             <thead>
               <tr>
-                <th>
+                <th className="text-center">
                   <strong>No</strong>
                 </th>
-                <th>
-                  <strong>User / Author</strong>
+
+                <th className="text-center">
+                  <strong>Author</strong>
                 </th>
-                <th>
+                <th className="text-center">
                   <strong>ISBN</strong>
                 </th>
-                <th>
+                <th className="text-center">
                   <strong>E-book</strong>
                 </th>
-                <th>
+                <th className="text-center">
                   <strong>Status</strong>
                 </th>
-                <th>
+                <th className="text-center">
                   <strong>Action</strong>
                 </th>
               </tr>
             </thead>
-            {transactionData.map((data) => (
+
+            {bookData.data.data.book.map((book, index) => (
               <tbody striped>
                 <tr>
-                  <td>{data.id}</td>
-                  <td>{data.userOrAuthor}</td>
-                  <td>{data.ISBN}</td>
-                  <td>{data.ebook}</td>
+                  <td>{index + 1}</td>
+
+                  <td>{book.author}</td>
+                  <td>{book.isbn}</td>
+                  <td>{book.file}</td>
                   <td
                     style={{
                       color:
-                        data.status === 0
+                        book.status === "Approve"
                           ? "#0ACF83"
-                          : data.status === 1
+                          : book.status === "Cancel"
                           ? "#FF0742"
                           : "#F7941E",
                     }}
                   >
                     <strong>
-                      {data.status === 0
+                      {book.status === "Approve"
                         ? "Approve"
-                        : data.status === 1
+                        : book.status === "Cancel"
                         ? "Cancel"
-                        : "Waiting to be verified"}
+                        : "Waiting"}
                     </strong>
                   </td>
-                  <td>
-                    <DropdownButton variant="info" title="Status">
-                      <Dropdown.Item>Approve</Dropdown.Item>
-                      <Dropdown.Item>Cancel</Dropdown.Item>
-                    </DropdownButton>
+                  <td className="d-flex">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() => approveBook(book.id)}
+                    >
+                      Approve
+                    </Button>
+                    <div
+                      className="buttonActionSeparator"
+                      style={{ marginLeft: "5px" }}
+                    />
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={() => cancelBook(book.id)}
+                    >
+                      Cancel
+                    </Button>
                   </td>
                 </tr>
               </tbody>
