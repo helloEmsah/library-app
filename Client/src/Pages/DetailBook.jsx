@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, useHistory } from "react-router-dom";
 import { useQuery } from "react-query";
 import { API } from "../Config/api";
+import Spinner from "../Components/Spinner";
 import style from "../Styles/styles";
 
 function DetailBook() {
@@ -14,7 +15,7 @@ function DetailBook() {
   );
 
   return isLoading || !detailBook ? (
-    <h1>Loading...</h1>
+    <Spinner />
   ) : error ? (
     <h1>Your Error : {error.message}</h1>
   ) : (

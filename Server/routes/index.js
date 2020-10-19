@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 const { authentication, authAdmin } = require("../middleware/auth");
 const { uploadProfile } = require("../middleware/uploadProfile");
 const {

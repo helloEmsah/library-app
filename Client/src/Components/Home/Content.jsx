@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Card, Row, Col, Container, Dropdown } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
+import Spinner from "../Spinner";
 import { API } from "../../Config/api";
 import { useQuery, useMutation } from "react-query";
 import homeHeroImage from "../../Images/homeHeroImage.png";
@@ -28,7 +29,7 @@ function Content() {
   });
 
   return isLoading || !bookData || !categoryData || !categorySelector ? (
-    <h1>Loading...</h1>
+    <Spinner />
   ) : error ? (
     <h1>Your Error : {error.message}</h1>
   ) : (

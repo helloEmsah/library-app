@@ -1,20 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { Card, Col, Row, Container } from "react-bootstrap";
 import { LoginContext } from "../Context/LoginContext";
 import Spinner from "../Components/Spinner";
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import { API } from "../Config/api";
 
 function MyLibrary() {
   const { id } = useParams();
   const history = useHistory();
   const [state, dispatch] = useContext(LoginContext);
+  const [bookId, setBookIdId] = useState("");
 
   const { isLoading, error, data: bookData, refetch } = useQuery(
     "getLibrary",
-    () => API.get(`/library`)
+    () => API.get(`/book/${bookId}`)
   );
+
+  const [reload] = useMutation(async () => {
+    refetch();
+  });
 
   return isLoading || !bookData ? (
     <Spinner />
@@ -37,14 +42,14 @@ function MyLibrary() {
               <Col lg={3}>
                 <Link
                   style={{ textDecoration: "none" }}
-                  onClick={() => history.push(`/detailbook/${book.bookId}`)}
+                  onClick={() => history.push(`/detailbook/${book.id}`)}
                 >
                   <Card border="dark" id="bookImageCard">
                     <Card.Body style={{ padding: 0 }}>
                       <div class="bookImageContainer">
                         <img
                           className="bookImage"
-                          src={book.image}
+                          src={book.thumbnail}
                           alt=""
                           srcset=""
                         />
