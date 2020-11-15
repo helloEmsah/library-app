@@ -1,10 +1,18 @@
+//Admin Token:
+// Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA1NDQ1ODI5fQ.KA81pyl27D8r8QZ3ix3B1NRTwo3FVFz0KKpKNhsdJYY
+
+// User Token:
+// Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
+
+###
+
 # @name Register
 POST http://localhost:5000/api/v1/register
 Content-Type: application/json
 
 {
-  "fullName": "Jane Doe",
-  "email"   : "janeDoe@root.com",
+  "fullName": "Rexona Soffel",
+  "email"   : "rexonaSoffel@root.com",
   "password" : "thisisuser",
   "gender": "Female",
   "phone": "08123456784",
@@ -19,27 +27,33 @@ Content-Type: application/json
 //Authorization: 
 
 {
-  "email"   : "janeDoe@root.com",
+  "email"   : "rexonaSoffel@root.com",
   "password" : "thisisuser"
 }
 
 ###
 
-# @name getAllUser
+# @name getUsers
 GET http://localhost:5000/api/v1/user
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
+
 
 ###
 
 # @name getUser
 GET http://localhost:5000/api/v1/user/2
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
+
 
 ###
 
 # @name deleteUser
-DELETE http://localhost:5000/api/v1/user/4
+DELETE http://localhost:5000/api/v1/user/3
 Content-Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA1NDQ1ODI5fQ.KA81pyl27D8r8QZ3ix3B1NRTwo3FVFz0KKpKNhsdJYY
+
 
 ###
 

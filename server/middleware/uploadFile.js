@@ -1,65 +1,49 @@
-const multer = require("multer");
-exports.upload = (fileFields) => {
+var multer = require("multer");
+
+exports.uploadPDF = (fileName) => {
   var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      if (file.originalname.match(/\.(epub|EPUB|PDF|pdf)$/)) {
-        cb(null, "upload/ebook/");
-      } else {
-        cb(null, "upload/thumbnail/");
-      }
+    destination: (req, file, cb) => {
+      cb(null, "uploads/pdf");
     },
-    filename: function (req, file, cb) {
-      cb(null, Date.now() + "-" + file.originalname.replace(" ", "-"));
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + "-" + file.originalname);
     },
   });
 
-  const imageFilter = function (req, file, cb) {
-    if (file.fieldname === "file") {
-      if (!file.originalname.match(/\.(PDF|pdf|EPUB|epub)$/)) {
-        req.fileValidationError = {
-          message: "Only PDF or EPUB File Allowed",
-        };
-        return cb(new Error("Only Pdf Or Epub files are allowed!"), false);
-      }
-    } else {
-      if (
-        !file.originalname.match(
-          /\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF|PDF|pdf)$/
-        )
-      ) {
-        req.fileValidationError = {
-          message: "Only image files are allowed!",
-        };
-        return cb(new Error("Only image files are allowed!"), false);
-      }
+  const pdfFilter = (req, file, cb) => {
+    if (!file.originalname.match(/\.PDF|pdf|epub|EPUB|$/)) {
+      req.fileValidationError = {
+        message: "Only PDF or EPUB file are allowed",
+      };
+      return cb(new Error("Only PDF or EPUB file are allowed"));
     }
     cb(null, true);
   };
 
-  const maxSize = 2 * 1000 * 1000;
+  const maxSize = 20 * 1000 * 1000;
 
   const upload = multer({
     storage,
-    fileFilter: imageFilter,
+    fileFilter: pdfFilter,
     limits: {
       fileSize: maxSize,
     },
-  }).fields(fileFields);
+  }).single(fileName);
 
   return (req, res, next) => {
     upload(req, res, function (err) {
       if (req.fileValidationError)
         return res.status(400).send(req.fileValidationError);
 
-      if (!req.files && !err)
+      if (!req.file && !err)
         return res.status(400).send({
-          message: "Please select an image to upload",
+          message: "Please select file to upload",
         });
 
       if (err) {
         if (err.code === "LIMIT_FILE_SIZE") {
           return res.status(400).send({
-            message: "Max file sized 2MB",
+            message: "Max file sized 20mb",
           });
         }
         return res.status(400).send(err);

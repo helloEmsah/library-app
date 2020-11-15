@@ -1,23 +1,22 @@
-const multer = require("multer");
+var multer = require("multer");
 
-exports.uploadProfile = (file) => {
+exports.uploadImage = (fileName) => {
   var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, "uploads");
+    destination: (req, file, cb) => {
+      cb(null, "uploads/img");
     },
-    filename: function (req, file, cb) {
-      cb(null, Date.now() + "-" + file.originalname.replace(" ", "-"));
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + "-" + file.originalname);
     },
   });
 
-  const imageFilter = function (req, file, cb) {
-    if (!file.originalname.match(/\.(png|PNG|JPG|JPEG|jpg|jpeg)$/)) {
+  const imageFilter = (req, file, cb) => {
+    if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
       req.fileValidationError = {
-        message: "Only JPG, JPEG, PNG format are supported.",
+        message: "Only image file are allowed",
       };
-      return cb(new Error("Only JPG, JPEG, PNG format are supported."), false);
+      return cb(new Error("Only image file are allowerd"));
     }
-
     cb(null, true);
   };
 
@@ -29,7 +28,7 @@ exports.uploadProfile = (file) => {
     limits: {
       fileSize: maxSize,
     },
-  }).single(file);
+  }).single(fileName);
 
   return (req, res, next) => {
     upload(req, res, function (err) {

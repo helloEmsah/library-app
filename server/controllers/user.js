@@ -1,10 +1,10 @@
-const { User } = require("../models");
+const { users } = require("../models");
 
-exports.getAllUser = async (req, res) => {
+exports.getUsers = async (req, res) => {
   try {
-    const user = await User.findAll({
+    const user = await users.findAll({
       attributes: {
-        exclude: ["createdAt", "updatedAt"],
+        exclude: ["createdAt", "updatedAt", "password"],
       },
     });
 
@@ -25,17 +25,17 @@ exports.getAllUser = async (req, res) => {
 exports.getUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await User.findOne({
+    const user = await users.findOne({
       where: {
         id,
       },
       attributes: {
-        exclude: ["createdAt", "updatedAt"],
+        exclude: ["createdAt", "updatedAt", "password"],
       },
     });
     if (user) {
       return res.status(200).send({
-        message: "User with corresponding id has been loaded",
+        message: `User with id ${id} has been loaded successfully`,
         data: user,
       });
     } else {
@@ -55,13 +55,13 @@ exports.getUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
   try {
-    const user = await User.findOne({
+    const user = await users.findOne({
       where: {
         id: req.params.id,
       },
     });
     if (user) {
-      const deleteUser = await user.destroy({
+      const deleteUser = await users.destroy({
         where: {
           id: req.params.id,
         },
@@ -87,20 +87,64 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
-exports.uploadProfileImg = async (req, res) => {
-  try {
-    const user = await User.findOne({
-      where: {
-        id: req.user.id,
-      },
-    });
+// exports.uploadProfileImg = async (req, res) => {
+//   try {
+//     const user = await User.findOne({
+//       where: {
+//         id: req.user.id,
+//       },
+//     });
 
-    if (!user) {
-      res.status(404).send({ error: { message: "User not found" } });
-    }
-    const updateProfile = await User.update(
+//     if (!user) {
+//       res.status(404).send({ error: { message: "User not found" } });
+//     }
+//     const updateProfile = await User.update(
+//       {
+//         profile: req.file.filename,
+//       },
+//       {
+//         where: {
+//           id,
+//         },
+//       }
+//     );
+
+//     if (!updateProfile)
+//       return res.status(400).send({
+//         message: "Please try again",
+//       });
+
+//     const userResult = await User.findOne({
+//       where: {
+//         id,
+//       },
+
+//       attributes: {
+//         exclude: ["createdAt", "updatedAt"],
+//       },
+//     });
+
+//     res.send({
+//       message: "Successfully Upload Profile Image",
+//       data: userResult,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).send({
+//       error: {
+//         message: "Internal Server Error",
+//       },
+//     });
+//   }
+// };
+
+exports.updateUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const [userUpdated] = await users.update(
       {
-        profile: req.file.filename,
+        ...req.body,
+        picture: req.file.filename,
       },
       {
         where: {
@@ -109,28 +153,31 @@ exports.uploadProfileImg = async (req, res) => {
       }
     );
 
-    if (!updateProfile)
-      return res.status(400).send({
-        message: "Please try again",
+    if (!userUpdated) {
+      return res.status(404).send({
+        message: "User didn't exist",
       });
+    }
 
-    const userResult = await User.findOne({
+    const data = await users.findOne({
       where: {
         id,
       },
 
       attributes: {
-        exclude: ["createdAt", "updatedAt"],
+        exclude: ["password", "createdAt", "updatedAt"],
       },
     });
-
     res.send({
-      message: "Successfully Upload Profile Image",
-      data: userResult,
+      message: "User has been updated",
+      data: {
+        data,
+        path: req.file.path,
+      },
     });
   } catch (error) {
     console.log(error);
-    return res.status(500).send({
+    res.status(500).send({
       error: {
         message: "Internal Server Error",
       },

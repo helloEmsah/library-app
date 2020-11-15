@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const { authentication, authAdmin } = require("../middleware/auth");
-const { uploadProfile } = require("../middleware/uploadProfile");
+const { uploadImage } = require("../middleware/uploadImage");
 const {
-  getAllUser,
+  getUsers,
   getUser,
   deleteUser,
-  uploadProfileImg,
+  updateUser,
 } = require("../controllers/user");
 
 const { Register, Login, checkAuth } = require("../controllers/auth");
@@ -40,15 +40,10 @@ router.post("/login", Login);
 router.get("/auth", authentication, checkAuth);
 
 // USER ROUTE
-router.get("/user", getAllUser);
-router.get("/user/:id", getUser);
-router.delete("/user/:id", deleteUser);
-router.post(
-  "/user/uploadimage",
-  authentication,
-  uploadProfile("profileImg"),
-  uploadProfileImg
-);
+router.get("/user", authentication, getUsers);
+router.get("/user/:id", authentication, getUser);
+router.patch("/user/:id", authentication, uploadImage("picture"), updateUser);
+router.delete("/user/:id", authentication, authAdmin, deleteUser);
 
 // CATEGORY ROUTE
 router.get("/category", getAllCategory);
