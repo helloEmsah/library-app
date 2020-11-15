@@ -15,7 +15,6 @@ const {
 const { Register, Login, checkAuth } = require("../controllers/auth");
 
 const {
-  getAllLibrary,
   getLibrary,
   addLibrary,
   deleteLibrary,
@@ -63,9 +62,8 @@ router.patch("/book/:id", authentication, updateBook);
 router.delete("/book/:id", authentication, deleteBook);
 
 // LIBRARY ROUTE
-router.get("/library", getAllLibrary);
-router.get("/library/:id", getLibrary);
-router.post("/library", addLibrary);
-router.delete("/library/:id", deleteLibrary);
+router.get("/library/:id", authentication, getLibrary);
+router.post("/library", authentication, addLibrary);
+router.delete("/library/:id", authentication, deleteLibrary);
 
 module.exports = router;
