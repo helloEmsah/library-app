@@ -1,20 +1,20 @@
-const { Book, Category, User } = require("../models");
+const { books, categories, users } = require("../models");
 
 const joi = require("@hapi/joi");
 
-exports.getAllBook = async (req, res) => {
+exports.getBooks = async (req, res) => {
   try {
-    const book = await Book.findAll({
+    const book = await books.findAll({
       include: [
         {
-          model: Category,
+          model: categories,
           as: "category",
           attributes: {
             exclude: ["createdAt", "updatedAt"],
           },
         },
         {
-          model: User,
+          model: users,
           as: "user",
           attributes: {
             exclude: [
@@ -29,14 +29,7 @@ exports.getAllBook = async (req, res) => {
         },
       ],
       attributes: {
-        exclude: [
-          "createdAt",
-          "updatedAt",
-          "userId",
-          "UserId",
-          "categoryId",
-          "CategoryId",
-        ],
+        exclude: ["createdAt", "updatedAt"],
       },
     });
 
@@ -56,17 +49,18 @@ exports.getAllBook = async (req, res) => {
 
 exports.getBook = async (req, res) => {
   try {
-    const book = await Book.findOne({
+    const { id } = req.params;
+    const book = await books.findOne({
       include: [
         {
-          model: Category,
+          model: categories,
           as: "category",
           attributes: {
             exclude: ["createdAt", "updatedAt"],
           },
         },
         {
-          model: User,
+          model: users,
           as: "user",
           attributes: {
             exclude: [
@@ -113,86 +107,156 @@ exports.getBook = async (req, res) => {
   }
 };
 
+// exports.addBook = async (req, res) => {
+//   try {
+//     const {
+//       title,
+//       author,
+//       publication,
+//       categoryId,
+//       userId,
+//       page,
+//       isbn,
+//       about,
+//       file,
+//       thumbnail,
+//     } = req.body;
+
+//     // const schema = joi.object({
+//     //   title: joi.string().min(3).required(),
+//     //   author: joi.string().min(3).required(),
+//     //   publication: joi.string().min(3).required(),
+//     //   categoryId: joi.required(),
+//     //   page: joi.number(),
+//     //   isbn: joi.number(),
+//     //   about: joi.string().required(),
+//     // });
+//     // const { error } = schema.validate(req.body);
+//     // if (error) {
+//     //   return res.status(400).send({
+//     //     error: {
+//     //       message: error.details[0].message,
+//     //     },
+//     //   });
+//     // }
+
+//     const book = await Book.create({
+//       ...req.body,
+//       categoryId,
+//       userId,
+//     });
+
+//     if (book) {
+//       const bookResult = await Book.findOne({
+//         where: {
+//           id: book.id,
+//         },
+//         include: [
+//           {
+//             model: Category,
+//             as: "category",
+//             attributes: {
+//               exclude: ["createdAt", "updatedAt"],
+//             },
+//           },
+//           {
+//             model: User,
+//             as: "user",
+//             attributes: {
+//               exclude: [
+//                 "createdAt",
+//                 "updatedAt",
+//                 "gender",
+//                 "picture",
+//                 "role",
+//                 "password",
+//               ],
+//             },
+//           },
+//         ],
+//         attributes: {
+//           exclude: [
+//             "createdAt",
+//             "updatedAt",
+//             "userId",
+//             "UserId",
+//             "categoryId",
+//             "CategoryId",
+//           ],
+//         },
+//       });
+//       return res.status(200).send({
+//         message: "Book added",
+//         data: { bookResult },
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).send({
+//       error: {
+//         message: "Internal Server Error",
+//       },
+//     });
+//   }
+// };
+
 exports.addBook = async (req, res) => {
+  const { role } = req.user;
+  const { id } = req.user;
   try {
     const {
       title,
       author,
       publication,
       categoryId,
-      userId,
       page,
-      isbn,
       about,
-      file,
+      isbn,
       thumbnail,
     } = req.body;
 
-    // const schema = joi.object({
-    //   title: joi.string().min(3).required(),
-    //   author: joi.string().min(3).required(),
-    //   publication: joi.string().min(3).required(),
-    //   categoryId: joi.required(),
-    //   page: joi.number(),
-    //   isbn: joi.number(),
-    //   about: joi.string().required(),
-    // });
-    // const { error } = schema.validate(req.body);
-    // if (error) {
-    //   return res.status(400).send({
-    //     error: {
-    //       message: error.details[0].message,
-    //     },
-    //   });
-    // }
-
-    const book = await Book.create({
+    const book = await books.create({
       ...req.body,
-      categoryId,
-      userId,
+      userId: id,
+      file: req.file.filename,
     });
 
     if (book) {
-      const bookResult = await Book.findOne({
+      const bookResult = await books.findOne({
         where: {
           id: book.id,
         },
         include: [
           {
-            model: Category,
+            model: categories,
             as: "category",
             attributes: {
               exclude: ["createdAt", "updatedAt"],
             },
           },
           {
-            model: User,
+            model: users,
             as: "user",
             attributes: {
               exclude: [
                 "createdAt",
                 "updatedAt",
+                "password",
+                "phone",
+                "address",
                 "gender",
                 "picture",
                 "role",
-                "password",
               ],
             },
           },
         ],
         attributes: {
-          exclude: [
-            "createdAt",
-            "updatedAt",
-            "userId",
-            "UserId",
-            "categoryId",
-            "CategoryId",
-          ],
+          exclude: ["createdAt", "updatedAt"],
         },
       });
       return res.status(200).send({
-        message: "Book added",
+        message: "Book has been added successfully",
         data: { bookResult },
       });
     }
@@ -274,21 +338,21 @@ exports.updateBook = async (req, res) => {
 
 exports.deleteBook = async (req, res) => {
   try {
-    const book = await Book.findOne({
+    const book = await books.findOne({
       where: {
         id: req.params.id,
       },
     });
 
     if (book) {
-      const deleteBook = await Book.destroy({
+      const deleteBook = await books.destroy({
         where: {
           id: req.params.id,
         },
       });
       return res.status(200).send({
         data: {
-          message: "Book with corresponding id has been deleted",
+          message: `Book with id ${id} has been deleted`,
           id: req.params.id,
         },
       });

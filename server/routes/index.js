@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { authentication, authAdmin } = require("../middleware/auth");
+
 const { uploadImage } = require("../middleware/uploadImage");
+const { uploadFile } = require("../middleware/uploadFile");
+
 const {
   getUsers,
   getUser,
@@ -19,7 +22,7 @@ const {
 } = require("../controllers/library");
 
 const {
-  getAllBook,
+  getBooks,
   getBook,
   addBook,
   updateBook,
@@ -50,12 +53,12 @@ router.get("/category", getAllCategory);
 router.get("/category/:id", getCategory);
 router.post("/category", authentication, addCategory);
 router.patch("/category/:id", authentication, updateCategory);
-router.delete("/category/:id", authentication, deleteCategory);
+router.delete("/category/:id", authentication, authAdmin, deleteCategory);
 
 // BOOK ROUTE
-router.get("/book", getAllBook);
-router.get("/book/:id", getBook);
-router.post("/book", authentication, addBook);
+router.get("/books", authentication, getBooks);
+router.get("/book/:id", authentication, getBook);
+router.post("/book", authentication, uploadFile("file"), addBook);
 router.patch("/book/:id", authentication, updateBook);
 router.delete("/book/:id", authentication, deleteBook);
 

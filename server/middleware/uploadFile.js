@@ -1,9 +1,9 @@
 var multer = require("multer");
 
-exports.uploadPDF = (fileName) => {
+exports.uploadFile = (fileName) => {
   var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, "uploads/pdf");
+      cb(null, "uploads/file");
     },
     filename: (req, file, cb) => {
       cb(null, Date.now() + "-" + file.originalname);

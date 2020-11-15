@@ -98,15 +98,17 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyODE1
 
 ###
 
-# @name getAllBook
-GET http://localhost:5000/api/v1/book
-Content-Type: application/json
+# @name getBooks
+GET http://localhost:5000/api/v1/books
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
+
 
 ###
 
 # @name getBook
-GET http://localhost:5000/api/v1/book/
+GET http://localhost:5000/api/v1/book/1
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
 
 ###
 
