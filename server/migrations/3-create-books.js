@@ -1,32 +1,59 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Libraries", {
+    await queryInterface.createTable("books", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      bookId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Books",
-          key: "id",
-        },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
+      title: {
+        type: Sequelize.STRING,
+      },
+      author: {
+        type: Sequelize.STRING,
+      },
+      publication: {
+        type: Sequelize.STRING,
       },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: "Users",
+          model: "users",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
+      },
+      categoryId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "categories",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
+      page: {
+        type: Sequelize.INTEGER,
+      },
+      isbn: {
+        type: Sequelize.STRING,
+      },
+      about: {
+        type: Sequelize.STRING,
+      },
+      file: {
+        type: Sequelize.STRING,
+      },
+      thumbnail: {
+        type: Sequelize.STRING,
+      },
+      status: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +66,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Libraries");
+    await queryInterface.dropTable("books");
   },
 };
