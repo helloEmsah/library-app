@@ -110,6 +110,10 @@
   display: flex;
 } */
 
+#sidebar .namamenu {
+  font-size: 18px;
+}
+
 #sidebar .buttonmenu {
   color: #929292;
 }
