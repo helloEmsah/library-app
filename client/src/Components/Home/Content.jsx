@@ -38,8 +38,25 @@ function Content() {
   ) : (
     <div>
       <Container>
-        <div id="homeHeroImageContainer">
-          <img class="homeHeroImage" src={homeHeroImage} alt="" />
+        <div id="home-jumbotron" style={{ backgroundColor: "#E6F2FD" }}>
+          {/* <img class="homeHeroImage" src={homeHeroImage} alt="" /> */}
+          <Row>
+            <Col lg={6} className="d-flex justify-content-center flex-column">
+              <p className="text-header">
+                Share, read and <i>love</i>
+              </p>
+              <p className="text-sub-header">Reading is fascinating</p>
+            </Col>
+            <Col lg={6} className="d-flex justify-content-center ">
+              <div className="image-container">
+                <img
+                  src={require("../../Images/homeBookImage.png")}
+                  className="image"
+                  alt=""
+                />
+              </div>
+            </Col>
+          </Row>
         </div>
         <br />
         <hr />

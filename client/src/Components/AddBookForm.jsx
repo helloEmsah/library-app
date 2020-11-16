@@ -116,7 +116,7 @@ function AddBookForm() {
   ) : (
     <>
       <Container id="addForm">
-        <h1>Add Book</h1>
+        <h1 className="text-title">Add Book</h1>
         <Form
           onSubmit={(e) => {
             e.preventDefault();

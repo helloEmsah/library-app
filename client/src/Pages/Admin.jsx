@@ -69,9 +69,7 @@ function Admin() {
       <TopNavAdmin />
       <br />
       <Container>
-        <h3>
-          <strong>Book Verification</strong>
-        </h3>
+        <h3 className="text-title">Book Verification</h3>
         <div className="admin-bg">
           <Table borderless hover>
             <thead>
