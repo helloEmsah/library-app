@@ -11,10 +11,13 @@ function MyLibrary() {
   const history = useHistory();
   const [state, dispatch] = useContext(LoginContext);
   const [bookId, setBookIdId] = useState("");
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
+  const userId = localStorage.getItem("id");
 
   const { isLoading, error, data: bookData, refetch } = useQuery(
     "getLibrary",
-    () => API.get(`/book/${bookId}`)
+    () => API.get(`/library/${state.user.id}`)
   );
 
   const [reload] = useMutation(async () => {

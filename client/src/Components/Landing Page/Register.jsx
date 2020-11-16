@@ -77,12 +77,8 @@ function Register() {
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header>
-          <Modal.Title>
-            <p style={{ fontWeight: 800 }}>Sign Up</p>
-          </Modal.Title>
-        </Modal.Header>
         <Modal.Body>
+          <p style={{ fontWeight: 800, fontSize: 24 }}>Sign Up</p>
           <Form
             onSubmit={(e) => {
               e.preventDefault();
@@ -91,12 +87,6 @@ function Register() {
           >
             <Form.Group controlId="userEmail">
               <Form.Control
-                style={{
-                  backgroundColor: "#D2D2D2",
-                  opacity: 0.25,
-                  color: "#333333",
-                  borderColor: "black",
-                }}
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -106,12 +96,6 @@ function Register() {
             </Form.Group>
             <Form.Group controlId="userPassword">
               <Form.Control
-                style={{
-                  backgroundColor: "#D2D2D2",
-                  opacity: 0.25,
-                  color: "#333333",
-                  borderColor: "black",
-                }}
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -121,12 +105,6 @@ function Register() {
             </Form.Group>
             <Form.Group controlId="userFullName">
               <Form.Control
-                style={{
-                  backgroundColor: "#D2D2D2",
-                  opacity: 0.25,
-                  color: "#333333",
-                  borderColor: "black",
-                }}
                 type="text"
                 name="fullName"
                 placeholder="Full Name"
@@ -136,12 +114,6 @@ function Register() {
             </Form.Group>
             <Form.Group controlId="userGender">
               <Form.Control
-                style={{
-                  backgroundColor: "#D2D2D2",
-                  opacity: 0.25,
-                  color: "#333333",
-                  borderColor: "black",
-                }}
                 as="select"
                 name="gender"
                 value={gender}
@@ -154,12 +126,6 @@ function Register() {
             </Form.Group>
             <Form.Group controlId="userPhone">
               <Form.Control
-                style={{
-                  backgroundColor: "#D2D2D2",
-                  opacity: 0.25,
-                  color: "#333333",
-                  borderColor: "black",
-                }}
                 type="text"
                 name="phone"
                 placeholder="Phone"
@@ -169,12 +135,6 @@ function Register() {
             </Form.Group>
             <Form.Group controlId="userAddress">
               <Form.Control
-                style={{
-                  backgroundColor: "#D2D2D2",
-                  opacity: 0.25,
-                  color: "#333333",
-                  borderColor: "black",
-                }}
                 type="text"
                 name="address"
                 placeholder="Address"
@@ -184,16 +144,12 @@ function Register() {
             </Form.Group>
 
             <Form.Group>
-              <Button block type="submit" style={style.orangeButton}>
+              <Button block type="submit" style={style.grayButton}>
                 Sign Up
               </Button>
             </Form.Group>
           </Form>
           <br />
-          <p id="modalRegularText">
-            Already have an account? Click
-            <span style={{ fontWeight: 800 }}> here</span>
-          </p>
         </Modal.Body>
       </Modal>
     </>

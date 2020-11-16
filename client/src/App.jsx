@@ -10,8 +10,9 @@ import DetailBook from "./Pages/DetailBook";
 import ReadBook from "./Pages/ReadBook";
 import AddBook from "./Pages/AddBook";
 import TopNav from "./Components/Home/TopNav";
-import AdminPages from "./Pages/AdminPages";
-import PrivateRoute from "./Pages/PrivateRoute/Private";
+import Admin from "./Pages/Admin";
+import PrivateRoute from "./Pages/Route/PrivateRoute";
+import AdminRoute from "./Pages/Route/AdminRoute";
 import { API, setAuthToken } from "./Config/api";
 import { LoginContext } from "./Context/LoginContext";
 import "./index.css";
@@ -30,7 +31,7 @@ function App() {
 
         dispatch({
           type: "USER_LOADED",
-          payload: res.data.data.user,
+          payload: res.data.data,
         });
       } catch (error) {
         dispatch({
@@ -41,11 +42,13 @@ function App() {
     loadUser();
   }, []);
 
+  console.log(state.user);
+
   return (
     <Router>
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <PrivateRoute exact path="/admin" component={AdminPages} />
+        <AdminRoute exact path="/admin" component={Admin} />
         <PrivateRoute exact path="/readbook/:id" component={ReadBook} />
 
         <Container fluid>

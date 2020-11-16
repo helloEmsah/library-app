@@ -7,7 +7,7 @@ import { RiLogoutBoxRFill } from "react-icons/ri";
 import { useQuery } from "react-query";
 import Spinner from "../Spinner";
 import { LoginContext } from "../../Context/LoginContext";
-import { API } from "../../Config/api";
+import { API, urlAsset } from "../../Config/api";
 
 function Sidebar() {
   const [state, dispatch] = useContext(LoginContext);
@@ -27,7 +27,7 @@ function Sidebar() {
         <div id="sidebarProfileImageContainer">
           <img
             className="sidebarProfileImage"
-            src={userData.data.data.picture}
+            src={urlAsset.img + userData.data.data.picture}
             alt=""
           />
         </div>

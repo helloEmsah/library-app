@@ -1,4 +1,4 @@
-const { users } = require("../models");
+const { users, books } = require("../models");
 
 exports.getUsers = async (req, res) => {
   try {
@@ -43,6 +43,50 @@ exports.getUser = async (req, res) => {
         message: "User didn't exist",
       });
     }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      error: {
+        message: "Internal Server Error",
+      },
+    });
+  }
+};
+
+exports.getUserBook = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const book = await books.findAll({
+      include: [
+        {
+          model: users,
+          as: "user",
+          attributes: {
+            exclude: [
+              "password",
+              "gender",
+              "picture",
+              "phone",
+              "address",
+              "createdAt",
+              "updatedAt",
+            ],
+          },
+        },
+      ],
+
+      attributes: {
+        exclude: ["userId", "createdAt", "updatedAt"],
+      },
+      where: {
+        userId: id,
+      },
+    });
+
+    return res.status(200).send({
+      message: `Literature belongs to user id ${id} has been loaded successfully`,
+      data: { book },
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).send({

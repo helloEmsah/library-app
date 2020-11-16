@@ -16,8 +16,8 @@ exports.getLibrary = async (req, res) => {
           },
           include: [
             {
-              model: libraries,
-              as: "libraries",
+              model: users,
+              as: "user",
               attributes: {
                 exclude: ["id", "literatureId", "createdAt", "updatedAt"],
               },

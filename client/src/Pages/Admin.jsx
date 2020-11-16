@@ -5,7 +5,7 @@ import { API } from "../Config/api";
 import { useQuery, useMutation } from "react-query";
 import Spinner from "../Components/Spinner";
 
-function AdminPages() {
+function Admin() {
   const userStateId = localStorage.getItem("id");
 
   const { data: categoryData } = useQuery("getCategory", () =>
@@ -153,4 +153,4 @@ function AdminPages() {
   );
 }
 
-export default AdminPages;
+export default Admin;

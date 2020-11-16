@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { LoginContext } from "../../Context/LoginContext";
+import Spinner from "../../Components/Spinner";
 
-const Private = ({ component: Component, ...rest }) => {
+const AdminRoute = ({ component: Component, ...rest }) => {
   const [state] = useContext(LoginContext);
 
   return (
@@ -10,15 +11,15 @@ const Private = ({ component: Component, ...rest }) => {
       {...rest}
       render={(props) =>
         state.loading ? (
-          <h1>Loading...</h1>
-        ) : state.isLogin ? (
+          <Spinner />
+        ) : state.isLogin && state.user.role === "admin" ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/" />
+          <Redirect to="/home" />
         )
       }
     />
   );
 };
 
-export default Private;
+export default AdminRoute;

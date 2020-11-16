@@ -10,6 +10,7 @@ const {
   getUser,
   deleteUser,
   updateUser,
+  getUserBook,
 } = require("../controllers/user");
 
 const { Register, Login, checkAuth } = require("../controllers/auth");
@@ -58,6 +59,7 @@ router.delete("/category/:id", authentication, authAdmin, deleteCategory);
 router.get("/books", authentication, getBooks);
 router.get("/book/:id", authentication, getBook);
 router.post("/book", authentication, uploadFile("file"), addBook);
+router.get("/user-book/:id", authentication, getUserBook);
 router.patch("/book/:id", authentication, updateBook);
 router.delete("/book/:id", authentication, deleteBook);
 

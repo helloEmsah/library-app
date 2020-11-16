@@ -1,8 +1,8 @@
-const { Category } = require("../models");
+const { categories } = require("../models");
 
 exports.getAllCategory = async (req, res) => {
   try {
-    const category = await Category.findAll({
+    const category = await categories.findAll({
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
@@ -24,7 +24,7 @@ exports.getAllCategory = async (req, res) => {
 
 exports.getCategory = async (req, res) => {
   try {
-    const category = await Category.findOne({
+    const category = await categories.findOne({
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
@@ -53,7 +53,7 @@ exports.getCategory = async (req, res) => {
 
 exports.addCategory = async (req, res) => {
   try {
-    const category = await Category.create(req.body);
+    const category = await categories.create(req.body);
 
     return res.status(200).send({
       message: "Category added successfully",
@@ -71,14 +71,14 @@ exports.addCategory = async (req, res) => {
 
 exports.updateCategory = async (req, res) => {
   try {
-    const category = await Category.update(req.body, {
+    const category = await categories.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
 
     if (category) {
-      const updatedCategory = await Category.findOne({
+      const updatedCategory = await categories.findOne({
         where: {
           id: req.params.id,
         },
@@ -107,13 +107,13 @@ exports.updateCategory = async (req, res) => {
 
 exports.deleteCategory = async (req, res) => {
   try {
-    const category = await Category.findOne({
+    const category = await categories.findOne({
       where: {
         id: req.params.id,
       },
     });
     if (category) {
-      const deleteCategory = await Category.destroy({
+      const deleteCategory = await categories.destroy({
         where: {
           id: req.params.id,
         },

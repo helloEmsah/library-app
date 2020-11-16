@@ -46,6 +46,12 @@ GET http://localhost:5000/api/v1/user/2
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
 
+###
+
+# @name getUserBook
+GET http://localhost:5000/api/v1/user-book/2
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
 
 ###
 
@@ -160,3 +166,8 @@ Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4NTUyfQ.YWsOeikkf3-fvwTKRw5OhNLLi4SbzVxZlbd7Zl7WnMA
 
 ###
+
+# @name getLibrary
+GET http://localhost:5000/api/v1/library/2
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY

@@ -48,7 +48,7 @@ function Login() {
 
         dispatch({
           type: "USER_LOADED",
-          payload: res.data.data.user,
+          payload: res.data.data,
         });
       } catch (error) {
         dispatch({
@@ -78,13 +78,9 @@ function Login() {
         Sign In
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header>
-          <Modal.Title>
-            <p style={{ fontWeight: 800 }}>Sign In</p>
-          </Modal.Title>
-        </Modal.Header>
+      <Modal centered show={show} onHide={handleClose}>
         <Modal.Body>
+          <p style={{ fontWeight: 800, fontSize: 24 }}>Sign In</p>
           <Form
             onSubmit={(e) => {
               handleSubmit(e);
@@ -92,12 +88,6 @@ function Login() {
           >
             <Form.Group controlId="userEmail">
               <Form.Control
-                style={{
-                  backgroundColor: "#D2D2D2",
-                  opacity: 0.25,
-                  color: "#333333",
-                  borderColor: "black",
-                }}
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -112,27 +102,15 @@ function Login() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => handleChange(e)}
-                style={{
-                  backgroundColor: "#D2D2D2",
-                  opacity: 0.25,
-                  color: "#333333",
-                  borderColor: "black",
-                }}
               />
             </Form.Group>
             <Form.Group>
-              <Button block type="submit" style={style.grayButton}>
+              <Button block type="submit" style={style.orangeButton}>
                 Sign In
               </Button>
             </Form.Group>
           </Form>
           <br />
-          <p id="modalRegularText">
-            Don't have an account yet? Click
-            <Link to="/">
-              <span style={{ fontWeight: 800 }}> here</span>
-            </Link>
-          </p>
         </Modal.Body>
       </Modal>
     </>
