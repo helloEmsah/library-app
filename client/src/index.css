@@ -102,39 +102,39 @@
 /*        SIDEBAR   */
 /* ---------------- */
 
-#sidebar {
+/* #sidebar {
   position: fixed;
 }
 
-#sidebarLink ul {
-  list-style-type: none;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: normal;
-}
+#sidebar .link-menu {
+  display: flex;
+} */
 
-#sidebarLink .linkText {
+#sidebar .buttonmenu {
   color: #929292;
 }
 
-#sidebarLink .linkText:hover {
-  width: 150px;
-  height: 30px;
-  color: #ffffff;
-  border-radius: 5px;
+#sidebar .buttonmenu-logout {
+  color: #929292;
+}
+
+#sidebar .buttonmenu:active {
   background-color: #ee4622;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
 }
 
-.linkTextSidebarLogout {
-  font-size: 20px;
+#sidebar .buttonmenu:hover {
+  background-color: #ee4622;
+  border-radius: 25px;
+  color: white;
 }
 
-.linkTextSidebarLogout:hover {
-  width: 150px;
-  height: 30px;
-  color: #ffffff;
-  border-radius: 5px;
-  background-color: #ee2222;
+#sidebar .buttonmenu-logout:hover {
+  background-color: #ff0742;
+  border-radius: 25px;
+  color: white;
 }
 
 #sidebarProfileImageContainer {
@@ -166,7 +166,7 @@
 #homeHeroImageContainer {
   display: block;
   margin: auto;
-  width: 60vw;
+  width: 80vw;
   height: 50vh;
 }
 
@@ -224,9 +224,19 @@
   color: #8a8c90;
 }
 
+#profileWrapper .image-btn-wrapper {
+  float: right;
+}
+
 #profileWrapper .profilePictureContainer {
   width: 196px;
   height: 200px;
+}
+
+#profileWrapper .btn {
+  background-color: #ee4622;
+  border-color: #ee4622;
+  color: white;
 }
 
 #profileWrapper .profilePictureImage {
@@ -238,6 +248,7 @@
 #profileWrapper .profileMyBook {
   font-family: "Times New Roman", Times, serif;
   font-weight: bold;
+  font-size: 30px;
 }
 
 #userBook .image-container {
@@ -280,12 +291,21 @@
 #userBook .title {
   font-family: "Times New Roman", Times, serif;
   font-weight: bold;
-  color: #000000;
-  font-size: 22px;
+  font-size: 20px;
+  line-height: 25px;
+  color: black;
 }
 
 #userBook .author {
-  color: red;
+  position: relative;
+  bottom: 12px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 18px;
+  color: #929292;
+  margin-bottom: 25px;
 }
 
 /* ---------------- */

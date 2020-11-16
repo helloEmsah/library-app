@@ -12,7 +12,7 @@ exports.getLibrary = async (req, res) => {
           model: books,
           as: "book",
           attributes: {
-            exclude: ["thumbnail", "userId", "createdAt", "updatedAt"],
+            exclude: ["userId", "createdAt", "updatedAt"],
           },
           include: [
             {

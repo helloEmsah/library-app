@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
+import { Button } from "react-bootstrap";
 import { MdLibraryBooks } from "react-icons/md";
 import { AiFillFileAdd } from "react-icons/ai";
 import { RiLogoutBoxRFill } from "react-icons/ri";
@@ -22,7 +23,7 @@ function Sidebar() {
   ) : error ? (
     <h1>Your Error : {error.message}</h1>
   ) : (
-    <div>
+    <div id="sidebar">
       <div id="userInfo">
         <div id="sidebarProfileImageContainer">
           <img
@@ -37,56 +38,78 @@ function Sidebar() {
       </div>
 
       <hr />
-      <div id="sidebarLink">
-        <ul>
-          <li>
-            <Link style={{ textDecoration: "none" }} to="/profile">
-              <p className="linkText">
-                <FaUser /> Profile
-              </p>
-            </Link>
-          </li>
-          <br />
-          <li>
-            <Link style={{ textDecoration: "none" }} to="/mylibrary">
-              <p className="linkText">
-                <MdLibraryBooks /> My Library
-              </p>
-            </Link>
-          </li>
-          <br />
-          <li>
-            <Link style={{ textDecoration: "none" }} to="/addbook">
-              <p className="linkText">
-                <AiFillFileAdd /> Add Book
-              </p>
-            </Link>
-          </li>
-        </ul>
+      <div style={{ marginLeft: "20%", textAlign: "left", marginTop: "10%" }}>
+        <Link
+          className="linkmenu "
+          style={{ textDecoration: "none" }}
+          to="/profile"
+          // activeClassName="active"
+        >
+          <div className="buttonmenu">
+            <div style={{ marginLeft: "1%", padding: "8%" }}>
+              <FaUser size={24} /> <font className="namamenu"> Profile </font>
+            </div>
+          </div>
+        </Link>
+
+        <Link
+          className="linkmenu"
+          style={{ textDecoration: "none" }}
+          to="/my-library"
+        >
+          <div className="buttonmenu">
+            <div style={{ marginLeft: "1%", padding: "8%" }}>
+              <MdLibraryBooks size={24} />{" "}
+              <font className="namamenu"> My Library </font>
+            </div>
+          </div>
+        </Link>
+
+        <Link
+          className="linkmenu"
+          style={{ textDecoration: "none" }}
+          to="/add-book"
+        >
+          <div className="buttonmenu">
+            <div style={{ marginLeft: "1%", padding: "8%" }}>
+              <AiFillFileAdd size={24} />{" "}
+              <font className="namamenu"> Add Book </font>
+            </div>
+          </div>
+        </Link>
       </div>
+
+      {/* <div id="sidebarLink">
+        <Link className="link-list" to="/profile">
+          <FaUser size={20} /> <p className="link-text">Profile</p>
+        </Link>
+        <Link className="link-list" to="/profile">
+          <MdLibraryBooks size={20} /> <p className="link-text">My Library</p>
+        </Link>
+        <Link className="link-list" to="/add-book">
+          <AiFillFileAdd size={20} /> <p className="link-text">Add Book</p>
+        </Link>
+      </div> */}
       <br />
       <hr />
       <br />
-      <ul style={{ listStyleType: "none", fontSize: 25 }}>
-        <li>
-          <Link
-            style={{
-              textDecoration: "none",
-              color: "#929292",
-            }}
-            to="/"
+      <div style={{ marginLeft: "25%" }}>
+        <Link className="linkmenu" style={{ textDecoration: "none" }}>
+          <div
+            className="buttonmenu-logout"
             onClick={() =>
               dispatch({
                 type: "LOGOUT",
               })
             }
           >
-            <p className="linkTextSidebarLogout">
-              <RiLogoutBoxRFill /> Logout
-            </p>
-          </Link>
-        </li>
-      </ul>
+            <div style={{ marginLeft: "5%" }}>
+              <RiLogoutBoxRFill size={24} />{" "}
+              <font className="namamenu"> Logout </font>
+            </div>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }

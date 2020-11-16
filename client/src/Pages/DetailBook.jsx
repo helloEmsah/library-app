@@ -1,18 +1,36 @@
-import React from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import { useParams, useHistory } from "react-router-dom";
-import { useQuery } from "react-query";
-import { API } from "../Config/api";
+import { useQuery, useMutation } from "react-query";
+import { API, urlAsset } from "../Config/api";
 import Spinner from "../Components/Spinner";
 import style from "../Styles/styles";
 
 function DetailBook() {
   const { id } = useParams();
   const history = useHistory();
-
+  const [showAddModal, setShowAddModal] = useState(false);
   const { isLoading, error, data: detailBook } = useQuery("getDetail", () =>
     API.get(`/book/${id}`)
   );
+  const [message, setMessage] = useState("");
+
+  const [addCollection] = useMutation(async (bookId) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const body = JSON.stringify({ bookId: bookId });
+
+      const res = await API.post(`/library/`, body, config);
+      setMessage(res.data.message);
+    } catch (err) {
+      console.log(err);
+      setMessage(err.response.data.error.message);
+    }
+  });
 
   return isLoading || !detailBook ? (
     <Spinner />
@@ -66,7 +84,15 @@ function DetailBook() {
         </Row>
         <br />
         <div className="d-flex justify-content-end">
-          <Button style={style.orangeButton}>Add Library</Button>
+          <Button
+            style={style.orangeButton}
+            onClick={() => {
+              addCollection(detailBook.data.data.book.id);
+              setShowAddModal(true);
+            }}
+          >
+            Add Library
+          </Button>
           <div className="mr-3" />
           <Button
             style={style.grayButton}
@@ -76,6 +102,15 @@ function DetailBook() {
           >
             Read Book
           </Button>
+          <Modal
+            centered
+            show={showAddModal}
+            onHide={() => setShowAddModal(false)}
+          >
+            <Modal.Body>
+              Literature has been added to your collection
+            </Modal.Body>
+          </Modal>
         </div>
         <br />
         <br />

@@ -77,17 +77,22 @@ function Profile() {
               <p className="profileDesc">Address</p>
             </Col>
             <Col lg={4}>
-              <div className="profilePictureContainer">
-                <img
-                  className="profilePictureImage"
-                  src={urlAsset.img + profileData.data.data.picture}
-                  alt=""
-                />
+              <div className="image-btn-wrapper">
+                <div className="profilePictureContainer">
+                  <img
+                    className="profilePictureImage"
+                    src={urlAsset.img + profileData.data.data.picture}
+                    alt=""
+                  />
+                </div>
+                <br />
+                <Button
+                  style={{ width: 200 }}
+                  onClick={() => setShowUploadModal(true)}
+                >
+                  Change Picture
+                </Button>
               </div>
-              <br />
-              <Button onClick={() => setShowUploadModal(true)}>
-                Change Picture
-              </Button>
             </Col>
           </Row>
           <Modal
@@ -120,6 +125,7 @@ function Profile() {
       </div>
       <br />
       <h4 className="profileMyBook">My Book</h4>
+      <br />
       <div id="userBook">
         <Row>
           {userBook.data.data.book.map((book) => (

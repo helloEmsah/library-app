@@ -4,7 +4,7 @@ import { ReactReader } from "react-reader";
 import TopNav from "../Components/Home/TopNav";
 import Spinner from "../Components/Spinner";
 import { useQuery } from "react-query";
-import { API } from "../Config/api";
+import { API, urlAsset } from "../Config/api";
 
 function ReadBook() {
   const { id } = useParams();
@@ -22,7 +22,7 @@ function ReadBook() {
       <div style={{ position: "relative", height: "100vh" }}>
         {" "}
         <ReactReader
-          url={require(`../Dummy/epub/${readBook.data.data.book.file}`)}
+          url={urlAsset.file + readBook.data.data.book.file}
           title={readBook.data.data.book.title}
           location={"epubcfi(/6/2[cover]!/6)"}
           locationChanged={(epubcifi) => console.log(epubcifi)}

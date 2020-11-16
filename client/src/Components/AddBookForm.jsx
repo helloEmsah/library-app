@@ -234,7 +234,7 @@ function AddBookForm() {
             </div>
             <Form.File
               name="file"
-              accept=".pdf"
+              accept=".epub"
               onChange={(e) => {
                 setFormData({
                   ...formData,

@@ -5,6 +5,7 @@ const joi = require("@hapi/joi");
 exports.getBooks = async (req, res) => {
   try {
     const book = await books.findAll({
+      order: [["createdAt", "DESC"]],
       include: [
         {
           model: categories,
@@ -200,6 +201,111 @@ exports.getBook = async (req, res) => {
 //   }
 // };
 
+exports.getApprovedBooks = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const book = await books.findAll({
+      order: [["createdAt", "DESC"]],
+      where: {
+        status: "Approved",
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt", "userId", "categoryId"],
+      },
+      include: [
+        {
+          model: users,
+          as: "user",
+          attributes: {
+            exclude: [
+              "createdAt",
+              "updatedAt",
+              "password",
+              "phone",
+              "address",
+              "gender",
+              "picture",
+            ],
+          },
+        },
+
+        {
+          model: categories,
+          as: "category",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
+    });
+
+    res.send({
+      message: "Response Successfuly Loaded",
+      data: { book },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      error: {
+        message: "Internal Server Error",
+      },
+    });
+  }
+};
+
+exports.getApprovedBooksCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const book = await books.findAll({
+      order: [["createdAt", "DESC"]],
+      where: {
+        status: "Approved",
+        categoryId: id,
+      },
+      attributes: {
+        exclude: ["createdAt", "updatedAt", "userId", "categoryId"],
+      },
+      include: [
+        {
+          model: users,
+          as: "user",
+          attributes: {
+            exclude: [
+              "createdAt",
+              "updatedAt",
+              "password",
+              "phone",
+              "address",
+              "gender",
+              "picture",
+            ],
+          },
+        },
+
+        {
+          model: categories,
+          as: "category",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
+    });
+
+    res.send({
+      message: "Response Successfuly Loaded",
+      data: { book },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      error: {
+        message: "Internal Server Error",
+      },
+    });
+  }
+};
+
 exports.addBook = async (req, res) => {
   const { role } = req.user;
   const { id } = req.user;
@@ -272,27 +378,27 @@ exports.addBook = async (req, res) => {
 
 exports.updateBook = async (req, res) => {
   try {
-    const book = await Book.update(req.body, {
+    const book = await books.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
 
     if (book) {
-      const updatedBook = await Book.findOne({
+      const updatedBook = await books.findOne({
         where: {
           id: req.params.id,
         },
         include: [
           {
-            model: Category,
+            model: categories,
             as: "category",
             attributes: {
               exclude: ["createdAt", "updatedAt"],
             },
           },
           {
-            model: User,
+            model: users,
             as: "user",
             attributes: {
               exclude: [

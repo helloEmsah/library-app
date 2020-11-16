@@ -3,17 +3,20 @@ import { Card, Row, Col, Container, Dropdown } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import Spinner from "../Spinner";
 import { API } from "../../Config/api";
+import { LoginContext } from "../../Context/LoginContext";
 import { useQuery, useMutation } from "react-query";
 import homeHeroImage from "../../Images/homeHeroImage.png";
 
 function Content() {
+  const [state, dispatch] = useContext(LoginContext);
+
   const history = useHistory();
 
   const [categoryId, setCategoryId] = useState("");
 
   const { isLoading, error, data: bookData, refetch } = useQuery(
     "getBook",
-    () => API.get(`/book/${categoryId}`)
+    () => API.get(`/book-approved/${categoryId}`)
   );
 
   const { data: categoryData } = useQuery("getCategory", () =>
@@ -85,7 +88,7 @@ function Content() {
                   <Col lg={3}>
                     <Link
                       style={{ textDecoration: "none" }}
-                      onClick={() => history.push(`/detailbook/${book.id}`)}
+                      onClick={() => history.push(`/detail-book/${book.id}`)}
                     >
                       <Card border="dark" id="bookImageCard">
                         <Card.Body style={{ padding: 0 }}>

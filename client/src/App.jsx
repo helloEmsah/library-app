@@ -60,11 +60,11 @@ function App() {
             <Col lg={10}>
               <PrivateRoute exact path="/home" component={Home} />
               <PrivateRoute exact path="/profile" component={Profile} />
-              <PrivateRoute exact path="/mylibrary" component={MyLibrary} />
-              <PrivateRoute exact path="/addbook" component={AddBook} />
+              <PrivateRoute exact path="/my-library" component={MyLibrary} />
+              <PrivateRoute exact path="/add-book" component={AddBook} />
               <PrivateRoute
                 exact
-                path="/detailbook/:id"
+                path="/detail-book/:id"
                 component={DetailBook}
               />
             </Col>

@@ -27,6 +27,8 @@ const {
   addBook,
   updateBook,
   deleteBook,
+  getApprovedBooks,
+  getApprovedBooksCategory,
 } = require("../controllers/book");
 
 const {
@@ -60,12 +62,14 @@ router.get("/books", authentication, getBooks);
 router.get("/book/:id", authentication, getBook);
 router.post("/book", authentication, uploadFile("file"), addBook);
 router.get("/user-book/:id", authentication, getUserBook);
+router.get("/book-approved", getApprovedBooks);
+router.get("/book-approved/:id", getApprovedBooksCategory);
 router.patch("/book/:id", authentication, updateBook);
 router.delete("/book/:id", authentication, deleteBook);
 
 // LIBRARY ROUTE
 router.get("/library/:id", authentication, getLibrary);
-router.post("/library", authentication, addLibrary);
+router.post("/library/", authentication, addLibrary);
 router.delete("/library/:id", authentication, deleteLibrary);
 
 module.exports = router;
