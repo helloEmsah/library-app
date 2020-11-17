@@ -53,30 +53,12 @@ function App() {
         <AdminRoute exact path="/admin" component={Admin} />
         <PrivateRoute exact path="/readbook/:id" component={ReadBook} />
 
-        <Container fluid>
-          <TopNav />
-          <Row>
-            <Col lg={2}>
-              <Sidebar />
-            </Col>
-            <Col lg={10}>
-              <PrivateRoute exact path="/home" component={Home} />
-              <PrivateRoute exact path="/profile" component={Profile} />
-              <PrivateRoute exact path="/my-library" component={MyLibrary} />
-              <PrivateRoute exact path="/add-book" component={AddBook} />
-              <PrivateRoute
-                exact
-                path="/detail-book/:id"
-                component={DetailBook}
-              />
-              <AdminRoute
-                exact
-                path="/admin-add-book"
-                component={AdminAddBook}
-              />
-            </Col>
-          </Row>
-        </Container>
+        <PrivateRoute exact path="/home" component={Home} />
+        <PrivateRoute exact path="/profile" component={Profile} />
+        <PrivateRoute exact path="/my-library" component={MyLibrary} />
+        <PrivateRoute exact path="/add-book" component={AddBook} />
+        <PrivateRoute exact path="/detail-book/:id" component={DetailBook} />
+        <AdminRoute exact path="/admin-add-book" component={AdminAddBook} />
       </Switch>
     </Router>
   );
