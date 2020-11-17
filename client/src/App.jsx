@@ -9,6 +9,8 @@ import Profile from "./Pages/Profile";
 import DetailBook from "./Pages/DetailBook";
 import ReadBook from "./Pages/ReadBook";
 import AddBook from "./Pages/AddBook";
+import AddBookFormAdmin from "./Components/AddBookFormAdmin";
+import AdminAddBook from "./Pages/AdminAddBook";
 import TopNav from "./Components/Home/TopNav";
 import Admin from "./Pages/Admin";
 import PrivateRoute from "./Pages/Route/PrivateRoute";
@@ -66,6 +68,11 @@ function App() {
                 exact
                 path="/detail-book/:id"
                 component={DetailBook}
+              />
+              <AdminRoute
+                exact
+                path="/admin-add-book"
+                component={AdminAddBook}
               />
             </Col>
           </Row>

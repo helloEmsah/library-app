@@ -47,7 +47,7 @@ function TopNavAdmin() {
             <Dropdown.Item>
               <Link
                 style={{ textDecoration: "none", color: "#929292" }}
-                to="/addbook"
+                to="/admin-add-book"
               >
                 <TiDocumentAdd /> Add Book
               </Link>

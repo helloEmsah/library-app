@@ -6,7 +6,7 @@ import { API } from "../Config/api";
 import { LoginContext } from "../Context/LoginContext";
 import Spinner from "../Components/Spinner";
 
-function AddBookForm() {
+function AddBookFormAdmin() {
   const [state, dispatch] = useContext(LoginContext);
 
   const [showAddModal, setShowAddModal] = useState(false);
@@ -24,7 +24,7 @@ function AddBookForm() {
     thumbnail: "",
     about: "",
     file: "",
-    status: "Waiting",
+    status: "Approved",
   });
 
   const {
@@ -99,7 +99,7 @@ function AddBookForm() {
         page: "",
         isbn: "",
         file: "",
-        status: "Waiting",
+        status: "Approved",
         thumbnail: "",
         about: "",
       });
@@ -354,4 +354,4 @@ function AddBookForm() {
     </>
   );
 }
-export default AddBookForm;
+export default AddBookFormAdmin;

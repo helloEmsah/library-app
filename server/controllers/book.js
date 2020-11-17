@@ -320,7 +320,8 @@ exports.addBook = async (req, res) => {
       isbn,
       thumbnail,
     } = req.body;
-
+    // const thumbnail = req.files["thumbnail"][0].filename;
+    // const file = req.files["file"][0].filename;
     const book = await books.create({
       ...req.body,
       userId: id,

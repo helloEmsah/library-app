@@ -3,7 +3,7 @@ const router = express.Router();
 const { authentication, authAdmin } = require("../middleware/auth");
 
 const { uploadImage } = require("../middleware/uploadImage");
-const { uploadFile } = require("../middleware/uploadFile");
+const { uploadFile, uploadAddBook } = require("../middleware/uploadFile");
 
 const {
   getUsers,
@@ -61,6 +61,7 @@ router.delete("/category/:id", authentication, authAdmin, deleteCategory);
 router.get("/books", authentication, getBooks);
 router.get("/book/:id", authentication, getBook);
 router.post("/book", authentication, uploadFile("file"), addBook);
+// router.post("/book", authentication, uploadAddBook(), addBook);
 router.get("/user-book/:id", authentication, getUserBook);
 router.get("/book-approved", getApprovedBooks);
 router.get("/book-approved/:id", getApprovedBooksCategory);

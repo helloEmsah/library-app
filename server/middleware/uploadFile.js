@@ -53,3 +53,26 @@ exports.uploadFile = (fileName) => {
     });
   };
 };
+
+exports.uploadAddBook = () => {
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      file.fieldname === "thumbnail"
+        ? cb(null, "uploads/img")
+        : cb(null, "uploads/file");
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + "-" + file.originalname);
+    },
+  });
+
+  var cpUpload = multer({
+    storage: storage,
+  }).fields([{ name: "thumbnail" }, { name: "file" }]);
+
+  return (req, res, next) => {
+    cpUpload(req, res, function (err) {
+      return next();
+    });
+  };
+};
