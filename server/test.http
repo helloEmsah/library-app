@@ -1,0 +1,187 @@
+//Admin Token:
+// Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA1NDQ1ODI5fQ.KA81pyl27D8r8QZ3ix3B1NRTwo3FVFz0KKpKNhsdJYY
+
+// User Token:
+// Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
+
+###
+
+# @name Register
+POST http://localhost:5000/api/v1/register
+Content-Type: application/json
+
+{
+  "fullName": "Rexona Soffel",
+  "email"   : "rexonaSoffel@root.com",
+  "password" : "thisisuser",
+  "gender": "Female",
+  "phone": "08123456784",
+  "address": "Jl Pegangsaan Timur no 56"
+}
+
+###
+
+# @name Login
+POST http://localhost:5000/api/v1/login
+Content-Type: application/json
+//Authorization: 
+
+{
+  "email"   : "rexonaSoffel@root.com",
+  "password" : "thisisuser"
+}
+
+###
+
+# @name getUsers
+GET http://localhost:5000/api/v1/user
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
+
+
+###
+
+# @name getUser
+GET http://localhost:5000/api/v1/user/2
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
+
+###
+
+# @name getUserBook
+GET http://localhost:5000/api/v1/user-book/2
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
+
+###
+
+# @name deleteUser
+DELETE http://localhost:5000/api/v1/user/3
+Content-Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA1NDQ1ODI5fQ.KA81pyl27D8r8QZ3ix3B1NRTwo3FVFz0KKpKNhsdJYY
+
+
+###
+
+# @name getAllCategory
+GET http://localhost:5000/api/v1/category
+Content-Type: application/json
+
+###
+
+# @name getCategory
+GET http://localhost:5000/api/v1/category/1
+Content-Type: applicaton/json
+
+###
+
+# @name addCategory
+POST http://localhost:5000/api/v1/category
+Content-Type: application/json 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyODM4NjE0fQ.VRCFWt_2wnsBBodMRep7q2hjUkvL6rEH5vYRvFfLAwA
+
+{
+  "name": "Adult"
+}
+
+###
+
+# @name editCategory
+PATCH http://localhost:5000/api/v1/category/6
+Content-Type: application/json 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4NTUyfQ.YWsOeikkf3-fvwTKRw5OhNLLi4SbzVxZlbd7Zl7WnMA
+
+{
+  "name": "Computer"
+}
+
+###
+
+# @name deleteCategory
+DELETE  http://localhost:5000/api/v1/category/5
+Content-Type: application/json 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyODE1MjYzfQ.3qykrSRHeGIxs4kxVA2Mcqsb6GUZ9R_PEUGaxSwkpbU
+
+###
+
+# @name getBooks
+GET http://localhost:5000/api/v1/books
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
+
+
+###
+
+# @name getBook
+GET http://localhost:5000/api/v1/book/1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
+
+###
+
+# @name getApprovedBooks
+GET http://localhost:5000/api/v1/book-approved
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
+
+###
+
+# @name getApprovedBooksCategory
+GET http://localhost:5000/api/v1/book-approved/1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY
+
+###
+
+# @name addBook
+POST http://localhost:5000/api/v1/book
+Content-Type: application/json 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyODE1MjYzfQ.3qykrSRHeGIxs4kxVA2Mcqsb6GUZ9R_PEUGaxSwkpbU
+
+{
+	"title": "How to Install VGA",
+	"author": "Useless Dika",
+	"publication": "August 2020",
+	"categoryId": 1,
+	"userId": 2,
+	"page": 123,
+	"isbn": 15423122451,
+	"about": "Lorem Ipsum, this is just a dummy. There's nothing to see here, really.",
+	"file": "http://uploader.nusaserver.com/server/php/files/bismarck.epub",
+	"thumbnail": "http://uploader.nusaserver.com/server/php/files/51Q1ncll-YL%20%281%29.jpg",
+	"status": "Waiting"
+}
+
+###
+
+# @name editBook
+PATCH  http://localhost:5000/api/v1/book/4
+Content-Type: application/json 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4NTUyfQ.YWsOeikkf3-fvwTKRw5OhNLLi4SbzVxZlbd7Zl7WnMA
+
+{
+	"title": "How to Install RAM",
+	"author": "Pink Guy",
+	"publication": "May 2020",
+	"categoryId": 5,
+	"userId": 4,
+	"page": "250",
+	"isbn": 123456789,
+	"about": "Lorem Ipsum, this is just a dummy. There's nothing to see here, really.",
+	"file": "theDominator.epub",
+	"thumbnail": "howToInstalRAM.jpg",
+	"status": "Waiting"
+}
+
+###
+
+# @name deleteBook
+DELETE  http://localhost:5000/api/v1/book/6
+Content-Type: application/json 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjAyNDg4NTUyfQ.YWsOeikkf3-fvwTKRw5OhNLLi4SbzVxZlbd7Zl7WnMA
+
+###
+
+# @name getLibrary
+GET http://localhost:5000/api/v1/library/2
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1NDQ1ODg2fQ.X7-DKz5J3pHyzrnr2VpYO8t9II7cBKm1SXWgBAtJ4VY

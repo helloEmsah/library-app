@@ -1,0 +1,483 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.formControlClass {
+  background-color: #000000;
+}
+
+/* ---------------- */
+/*   LANDING PAGE   */
+/* ---------------- */
+
+#leftLanding {
+  grid-column: 1;
+  margin: 25px 0px 0px 25px;
+}
+
+#rightLanding {
+  grid-column: 2;
+}
+
+#landingPage {
+  margin-left: 25px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+  display: grid;
+}
+
+#iconHeaderContainer {
+  width: 130px;
+  height: 40px;
+}
+
+#iconHeaderContainer .iconHeaderImage {
+  width: 100%;
+  height: 100%;
+}
+
+#headerLandingContainer {
+  margin-top: 50px;
+  width: 440px;
+  height: 130px;
+}
+
+#headerLandingContainer .headerLandingImage {
+  width: 100%;
+  height: 100%;
+}
+
+#subHeaderLandingContainer {
+  position: relative;
+  top: 50px;
+  width: 400px;
+  height: 100px;
+}
+
+#subHeaderLandingContainer .subHeaderLandingImage {
+  width: 100%;
+  height: 100%;
+}
+
+#bookcaseLandingContainer {
+  float: right;
+  max-width: 80%;
+  height: 100vh;
+}
+
+#bookcaseLandingContainer .bookcaseLandingImage {
+  width: 100%;
+  height: 100%;
+}
+
+#homeButtonContainer {
+  position: relative;
+  margin-left: -20px;
+  top: 100px;
+  left: 20px;
+  display: flex;
+}
+
+#homeButtonContainer span {
+  margin-left: 15px;
+}
+
+#signUpButton {
+  width: 200px;
+}
+
+#signInButton {
+  width: 200px;
+}
+
+#modalRegularText {
+  font-size: 18px;
+  text-align: center;
+}
+
+/* ---------------- */
+/*        SIDEBAR   */
+/* ---------------- */
+
+/* #sidebar {
+  position: fixed;
+}
+
+#sidebar .link-menu {
+  display: flex;
+} */
+
+#sidebar .namamenu {
+  font-size: 18px;
+}
+
+#sidebar .buttonmenu {
+  color: #929292;
+}
+
+#sidebar .buttonmenu-logout {
+  color: #929292;
+}
+
+#sidebar .buttonmenu:active {
+  background-color: #ee4622;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+}
+
+#sidebar .buttonmenu:hover {
+  background-color: #ee4622;
+  border-radius: 25px;
+  color: white;
+}
+
+#sidebar .buttonmenu-logout:hover {
+  background-color: #ff0742;
+  border-radius: 25px;
+  color: white;
+}
+
+#sidebarProfileImageContainer {
+  display: block;
+  margin: auto;
+  border: 4px solid #e5e5e5;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+#sidebarProfileImageContainer .sidebarProfileImage {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+#userInfo .userInfoName h1 {
+  text-align: center;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 33px;
+}
+
+/* ------------- */
+/*      HOME     */
+/* ------------- */
+
+#home-jumbotron {
+  width: 100%;
+  height: 60vh;
+  padding: 4;
+  border-radius: 5px;
+}
+
+#home-jumbotron .text-header {
+  font-family: "Times New Roman";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 101.5%;
+  margin: 0px 60px 10px 60px;
+}
+#home-jumbotron i {
+  font-family: inherit;
+}
+
+#home-jumbotron .text-sub-header {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 101.5%;
+  margin-left: 60px;
+}
+
+#home-jumbotron .image-container {
+  float: right;
+  margin-top: 25px;
+  width: 230px;
+  height: 300px;
+}
+
+#home-jumbotron .image {
+  width: 100%;
+  height: 100%;
+}
+
+/* #homeHeroImageContainer {
+  display: block;
+  margin: auto;
+  width: 80vw;
+  height: 50vh;
+}
+
+#homeHeroImageContainer .homeHeroImage {
+  width: 100%;
+  height: 100%;
+} */
+
+/* ------------- */
+/*     PROFILE   */
+/* ------------- */
+
+#profileWrapper .profileBackground {
+  background-color: #fdede6;
+  border-radius: 10px;
+}
+
+#profileWrapper .profileTitle {
+  font-family: "Times New Roman", Times, serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 37px;
+  margin-bottom: 50px;
+}
+
+#profileWrapper .profileArea {
+  padding: 20px;
+}
+
+#profileWrapper .profileIcon {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  color: #8a8c90;
+  margin: 10px 0px 25px 10px;
+}
+
+#profileWrapper .profileName {
+  position: relative;
+  right: 20px;
+  top: 10px;
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 800;
+  color: #050505;
+}
+
+#profileWrapper .profileDesc {
+  position: relative;
+  right: 20px;
+  width: 100px;
+  height: 16px;
+  font-size: 12px;
+  color: #8a8c90;
+}
+
+#profileWrapper .image-btn-wrapper {
+  float: right;
+}
+
+#profileWrapper .profilePictureContainer {
+  width: 196px;
+  height: 200px;
+}
+
+#profileWrapper .btn {
+  background-color: #ee4622;
+  border-color: #ee4622;
+  color: white;
+}
+
+#profileWrapper .profilePictureImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+#profileWrapper .profileMyBook {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+#userBook .image-container {
+  width: 180px;
+  height: 250px;
+}
+
+#userBook .image {
+  width: 100%;
+  height: 100%;
+}
+
+#userBook .waiting-info {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 101.5%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 45%;
+  margin-left: 20px;
+  color: #ffd600;
+}
+
+#userBook .cancel-info {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 101.5%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 45%;
+  margin-left: 60px;
+  /* or 18px */
+  color: #ee4622;
+}
+
+#userBook .title {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 25px;
+  color: black;
+}
+
+#userBook .author {
+  position: relative;
+  bottom: 12px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 18px;
+  color: #929292;
+  margin-bottom: 25px;
+}
+
+/* ---------------- */
+/*      My Library  */
+/* ---------------- */
+
+#bookImageCard {
+  width: 200px;
+  height: 270px;
+}
+
+#bookImageCard .bookImageContainer {
+  width: 100%;
+  height: 100%;
+}
+
+#bookImageCard .bookImage {
+  width: 100%;
+  height: 100%;
+}
+
+#bookCardDescription .bookTitle {
+  margin-top: 10px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+#bookCardDescription .bookAuthor {
+  position: relative;
+  bottom: 12px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 18px;
+  color: #929292;
+  margin-bottom: 25px;
+}
+
+/* --------------- */
+/*    DETAIL BOOK  */
+/* --------------- */
+
+#detailBookImageContainer {
+  width: 300px;
+  height: 380px;
+}
+
+#detailBookImageContainer .detailBookImage {
+  width: 100%;
+  height: 100%;
+}
+
+#detailBookInfo .bookTitle {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 48px;
+  line-height: 50px;
+  color: #000000;
+}
+
+#detailBookInfo .boldText {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  color: #000000;
+  line-height: 26px;
+}
+
+#detailBookInfo .regularText {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 16px;
+  color: #929292;
+  line-height: 16px;
+}
+
+#detailBookAbout .about-desc {
+  font-family: "Times New Roman", Times, serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 34px;
+  line-height: 43px;
+  color: #000000;
+}
+
+#detailBookAbout .paragraph {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 27px;
+  color: #929292;
+  text-align: justify;
+}
+
+/* --------- */
+/*    ADMIN  */
+/* --------- */
+
+#admin-page #adminNavbarProfilePicture {
+  border: 4px solid #e5e5e5;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+#adminNavbarProfilePicture .adminNavbarProfilePicture {
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+#admin-page .text-title {
+  font-family: "Times New Roman";
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* ---------------- */
+/*   ADD BOOK FORM  */
+/* ---------------- */
+
+#addForm .text-title {
+  font-family: "Times New Roman";
+  font-size: 30px;
+  font-weight: bold;
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "title": "Bismarck: The Final Days of Germany's Greatest Battleship",
+    "author": "Niklas Zetterling",
+    "year": 2009,
+    "category": "History",
+    "publisher": "Casemate Publishers",
+    "pages": 330,
+    "ISBN": "1612000754",
+    "file": "bismarck.epub",
+    "image": "https://m.media-amazon.com/images/I/51DM1Us+lUL.jpg",
+    "about": "When the German battleship Bismarck, a masterpiece of engineering, well-armored with a main artillery of eight 15-inch guns—left the port of Gotenhafen for her first operation on the night of May 18, 1941, the British battlecruiser Hood and the new battleship Prince of Wales were ordered to find her quickly, as several large convoys were heading for Britain."
+  },
+  {
+    "id": 2,
+    "title": "Slash",
+    "author": "Slash",
+    "year": 2008,
+    "publisher": "Harper Collins",
+    "category": "Biography",
+    "pages": 505,
+    "ISBN": " 0061351431",
+    "file": "slash.epub",
+    "image": "https://m.media-amazon.com/images/I/51t3N+TJHnL.jpg",
+    "about": "From one of the greatest rock guitarists of our era comes a memoir that redefines sex, drugs, and rock 'n' roll. He was born in England but reared in L.A., surrounded by the leading artists of the day amidst the vibrant hotbed of music and culture that was the early seventies. Slash spent his adolescence on the streets of Hollywood, discovering drugs, drinking, rock music, and girls, all while achieving notable status as a BMX rider. But everything changed in his world the day he first held the beat-up one-string guitar his grandmother had discarded in a closet."
+  },
+  {
+    "id": 3,
+    "title": "Pro MERN Stack, 2nd Edition",
+    "author": "Vasan Subramanian",
+    "year": 2019,
+    "publisher": "Apress",
+    "category": "Computer",
+    "pages": 568,
+    "ISBN": "1484243900",
+    "file": "proMernStack.epub",
+    "image": "https://wish4book.com/uploads/posts/2019-06/1559464226_03.jpg",
+    "about": "Assemble the complete stack required to build a modern web app using MongoDB, Express, React, and Node. This book also covers many other complementary tools: React Router, GraphQL, React-Bootstrap, Babel, and Webpack. This new edition will use the latest version of React (React 16) and the latest React Router (React Router 4), which has a significantly different approach to routing compared to React Router 2 which was used in the first edition of the book."
+  },
+  {
+    "id": 4,
+    "title": "The Vue Handbook",
+    "author": "Flavio Copes",
+    "year": 2020,
+    "publisher": "-",
+    "category": "Computer",
+    "pages": 568,
+    "ISBN": "-",
+    "file": "theVueHandbook.epub",
+    "image": "https://m.media-amazon.com/images/I/41ZiY1Zt4lL.jpg",
+    "about": "The Vue.js Handbook follows the 80/20 rule: learn in 20% of the time the 80% of a topic."
+  },
+  {
+    "id": 5,
+    "title": "A Smarter Way to Learn Javascript",
+    "author": "Mark Myers",
+    "year": 2013,
+    "publisher": "Createspace Independent Publishing Platform",
+    "category": "Computer",
+    "pages": 288,
+    "ISBN": "1497408180",
+    "file": "javascript.epub",
+    "image": "https://m.media-amazon.com/images/I/51MLPPvesNL.jpg",
+    "about": "Learning JavaScript is hell because of two problems. I remove the problems, and you start having fun. The first problem is retention. You remember only ten or twenty percent of what you read. That spells failure. To become fluent in a computer language, you have to retain pretty much everything."
+  },
+  {
+    "id": 6,
+    "title": "Mastering The Pentatonic And Blues Scales - Amazing Guitar Secrets",
+    "author": "Dan Denley",
+    "year": 2009,
+    "publisher": "-",
+    "category": "Music",
+    "pages": 41,
+    "ISBN": "-",
+    "file": "guitar.epub",
+    "image": "https://s.pdfdrive.com/assets/thumbs/334/3346d5974e1318b47ad50016c50b6630.jpg",
+    "about": "Learning JavaScript is hell because of two problems. I remove the problems, and you start having fun. The first problem is retention. You remember only ten or twenty percent of what you read. That spells failure. To become fluent in a computer language, you have to retain pretty much everything."
+  }
+]

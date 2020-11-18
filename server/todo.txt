@@ -1,0 +1,8 @@
+Add user relation on Book //is this done?
+Fix every joi validation if possible //is this done?
+Integrate with Frontend //Login and Register done
+Consider use Multer or similiar
+Consider use Formik or similiar 
+
+
+
