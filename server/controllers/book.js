@@ -320,6 +320,34 @@ exports.addBook = async (req, res) => {
       isbn,
       thumbnail,
     } = req.body;
+
+    const checkIsbn = await books.findOne({
+      include: [
+        {
+          model: users,
+          as: "user",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+
+      where: {
+        isbn: req.body.isbn,
+      },
+    });
+
+    if (checkIsbn) {
+      return res.status(500).send({
+        error: {
+          message: "ISBN already exists",
+        },
+      });
+    }
+
     // const thumbnail = req.files["thumbnail"][0].filename;
     // const file = req.files["file"][0].filename;
     const book = await books.create({
