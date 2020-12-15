@@ -64,7 +64,7 @@ function Login() {
       }
 
       if (email === "admin@root.com") {
-        history.push("/admin-dashboard");
+        history.push("/admin");
       } else history.push("/home");
     } catch (error) {
       console.log(error);
